@@ -6,22 +6,15 @@ import java.util.List;
 
 /**
  * @author thiagoaraujo
- * Depth-Frist search on a graph
+ * Depth-First search on a graph
  *
  */
-public class DepthFirstSearch implements ISearch {
+public class DepthFirstSearch extends Search {
 
-	/* (non-Javadoc)
-	 * @see ISearch#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Depth-First Search (DFS)";
+	public DepthFirstSearch(IPuzzleProblem problem) {
+		super(problem, "Depth-First Search (DFS)");
 	}
-
-	/* (non-Javadoc)
-	 * @see ISearch#search(IState)
-	 */
+	
 	@Override
 	public List<IState> search(IState meta) {
 		// TODO Auto-generated method stub
@@ -29,7 +22,7 @@ public class DepthFirstSearch implements ISearch {
 	}
 
 	@Override
-	public boolean isMeta(IState state) {
+	public boolean isMeta(IState state, IPuzzleProblem problem) {
 		// TODO Auto-generated method stub
 		return false;
 	}

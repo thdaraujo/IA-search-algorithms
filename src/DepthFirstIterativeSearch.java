@@ -8,19 +8,12 @@ import java.util.List;
  * @author thiagoaraujo
  *
  */
-public class DepthFirstIterativeSearch implements ISearch {
+public class DepthFirstIterativeSearch extends Search {
 
-	/* (non-Javadoc)
-	 * @see ISearch#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Iterative Depth-First Search";
+	public DepthFirstIterativeSearch(IPuzzleProblem problem){
+		super(problem, "Iterative Depth-First Search");
 	}
-
-	/* (non-Javadoc)
-	 * @see ISearch#search(IState)
-	 */
+	
 	@Override
 	public List<IState> search(IState meta) {
 		// TODO Auto-generated method stub
@@ -28,7 +21,7 @@ public class DepthFirstIterativeSearch implements ISearch {
 	}
 
 	@Override
-	public boolean isMeta(IState state) {
+	public boolean isMeta(IState state, IPuzzleProblem problem) {
 		// TODO Auto-generated method stub
 		return false;
 	}

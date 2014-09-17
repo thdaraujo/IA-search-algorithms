@@ -8,19 +8,12 @@ import java.util.List;
  * @author thiagoaraujo
  *
  */
-public class AStarSearch implements ISearch {
+public class AStarSearch extends Search {
 
-	/* (non-Javadoc)
-	 * @see ISearch#getName()
-	 */
-	@Override
-	public String getName() {
-		return "A* Search";
+	public AStarSearch(IPuzzleProblem problem){
+		super(problem, "A* Search");
 	}
-
-	/* (non-Javadoc)
-	 * @see ISearch#search(IState)
-	 */
+	
 	@Override
 	public List<IState> search(IState meta) {
 		// TODO Auto-generated method stub
@@ -28,7 +21,7 @@ public class AStarSearch implements ISearch {
 	}
 
 	@Override
-	public boolean isMeta(IState state) {
+	public boolean isMeta(IState state, IPuzzleProblem problem) {
 		// TODO Auto-generated method stub
 		return false;
 	}

@@ -12,27 +12,24 @@ import java.util.List;
 public class ReguaPuzzleProblem implements IPuzzleProblem {
 	
 	public static enum Action{
-		jumpLeft(-2),  	//2 positions to the left
 		moveLeft(-1),  	//1 position to the left
-		jumpRight(2), 	//2 positions to the right
+		jumpLeft(-2),  	//2 positions to the left
 		moveRight(1), 	//1 position to the right
+		jumpRight(2), 	//2 positions to the right
 		none(0);	   	//do nothing
 		
 		private final int shift;
         private Action(final int shift) { this.shift = shift; }
-        public int getValue() { return shift; }
+        public int getShift() { return shift; }
 	}
 	
 	private static char EMPTY_SPACE = '-';
-	private ISearch searchAlgorithm;
 	private int N;
 	private String initial;
 	private Node first;
 	
-	public ReguaPuzzleProblem(List<String> problemDefinition, ISearch searchAlgorithm) throws Exception{
+	public ReguaPuzzleProblem(List<String> problemDefinition) throws Exception{
 		init(problemDefinition);
-	
-		this.searchAlgorithm = searchAlgorithm;
 	}
 	
 	private void init(List<String> problemDefinition) throws Exception{
@@ -60,7 +57,9 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 		
 		this.initial = initialState;
 		this.N = n;
-		this.first = makeChild(null, Action.none, initialState);
+		
+		IState initial = new StateReguaPuzzle(Action.none, initialState);
+		this.first = makeChild(null, Action.none, initial);
 	}
 
 	@Override
@@ -74,17 +73,6 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 	@Override
 	public PuzzleType getPuzzleType() {
 		return PuzzleType.ReguaPuzzle;
-	}
-
-	/* (non-Javadoc)
-	 * @see IPuzzleMaker#searchAlgorithm()
-	 */
-	@Override
-	public String searchAlgorithm() {
-		if(this.searchAlgorithm != null){
-			return this.searchAlgorithm.getName();
-		}
-		return "none";
 	}
 
 	/* (non-Javadoc)
@@ -127,19 +115,20 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 
 	@Override
 	public boolean goalTest(IState state) {
-		// TODO Auto-generated method stub
-		return false;
+		//TODO mudar!!
+		System.out.println("Evaluating " + state.getStateDefinition());
+		return state.getStateDefinition().equals("AA-BB");
 	}
 
 	@Override
-	public Node makeChild(Node n, Object legalAction, String stateDefinition) {
-		String newStateDefinition = stateDefinition;
+	public Node makeChild(Node n, Object legalAction, IState state) {
+		String newStateDefinition = state.getStateDefinition();
 		
 		newStateDefinition = act((Action)legalAction, newStateDefinition);
-		IState state = new StateReguaPuzzle(legalAction, newStateDefinition);
+		IState newState = new StateReguaPuzzle(legalAction, newStateDefinition);
 		
 		int depth = n != null? n.getDepth() + 1 : 0;
-		return new Node(n, state, depth);
+		return new Node(n, newState, depth);
 	}
 	
 	private int getEmptyPosition(String stateDefinition){
@@ -150,23 +139,13 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 	 * returns true when the empty space can be moved (legal action)
 	 */
 	private boolean isLegal(Action action, String stateDefinition){
+		if(action == Action.none) return false; //ignore none
+		
 		int length = stateDefinition.length();
 		int emptyPosition = getEmptyPosition(stateDefinition);
 		
-		switch (action) {
-			case jumpLeft:
-				return emptyPosition > 1;
-			case moveLeft:
-				return emptyPosition > 0;
-			case jumpRight:
-				return emptyPosition < length - 2;
-			case moveRight:
-				return emptyPosition < length - 1;
-			case none:
-				return true;
-			default:
-				return false;
-		}
+		int finalPosition = emptyPosition + action.getShift();
+		return finalPosition >= 0 && finalPosition < length;
 	}
 
 	private String act(Action legalAction, String stateDefinition) {
@@ -174,7 +153,7 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 		int emptyPosition = getEmptyPosition(stateDefinition);
 		
 		int from = emptyPosition, 
-			to = emptyPosition + legalAction.getValue(); //calculate shift
+			to = emptyPosition + legalAction.getShift(); //calculate shift
 		
 		newStateDefinition = Utils.moveChar(from, to, stateDefinition);
 		

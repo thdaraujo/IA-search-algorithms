@@ -8,19 +8,12 @@ import java.util.List;
  * @author thiagoaraujo
  *
  */
-public class UniformCostSearch implements ISearch {
+public class UniformCostSearch extends Search {
 
-	/* (non-Javadoc)
-	 * @see ISearch#getName()
-	 */
-	@Override
-	public String getName() {
-		return "Uniform Cost Search";
+	public UniformCostSearch(IPuzzleProblem problem) {
+		super(problem, "Uniform Cost Search");
 	}
-
-	/* (non-Javadoc)
-	 * @see ISearch#search(IState)
-	 */
+	
 	@Override
 	public List<IState> search(IState meta) {
 		// TODO Auto-generated method stub
@@ -28,7 +21,7 @@ public class UniformCostSearch implements ISearch {
 	}
 
 	@Override
-	public boolean isMeta(IState state) {
+	public boolean isMeta(IState state, IPuzzleProblem problem) {
 		// TODO Auto-generated method stub
 		return false;
 	}

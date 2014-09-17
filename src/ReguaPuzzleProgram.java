@@ -34,12 +34,15 @@ public class ReguaPuzzleProgram {
 		File f = new File(args[0]);
 		List<String> lines = readFile(f);
 		
-		IPuzzleProblem problem = new ReguaPuzzleProblem(lines, new BreadthFirstSearch());
+		IPuzzleProblem problem = new ReguaPuzzleProblem(lines);
 		List<Object> legalActions = problem.getLegalActions(problem.getFirst().getState());
 		
 		for(Object action : legalActions){
 			System.out.println(action.toString());
 		}
+		
+		ISearch search = new BreadthFirstSearch(problem);
+		search.search(null);
 		
 	}
 	

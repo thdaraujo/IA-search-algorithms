@@ -9,7 +9,8 @@ import java.util.List;
  *
  */
 public interface ISearch {
-	String getName();
 	List<IState> search(IState meta);
-	boolean isMeta(IState state);
+	IPuzzleProblem getProblem();
+	String getSearchAlgorithm();
+	boolean isMeta(IState state, IPuzzleProblem problem);
 }
