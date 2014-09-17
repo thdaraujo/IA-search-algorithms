@@ -12,7 +12,7 @@ import java.util.List;
 public class DepthFirstSearch extends Search {
 
 	public DepthFirstSearch(IPuzzleProblem problem) {
-		super(problem, "Depth-First Search (DFS)");
+		super(problem, "Busca em Profundidade (BP)");
 	}
 	
 	@Override

@@ -20,7 +20,7 @@ import com.sun.xml.internal.ws.addressing.ProblemAction;
 public class BreadthFirstSearch extends Search {
 
 	public BreadthFirstSearch(IPuzzleProblem problem){
-		super(problem, "Breadth First Search");
+		super(problem, "Busca em Largura (BL)");
 	}
 	
 	@Override

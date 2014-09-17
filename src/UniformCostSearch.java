@@ -11,7 +11,7 @@ import java.util.List;
 public class UniformCostSearch extends Search {
 
 	public UniformCostSearch(IPuzzleProblem problem) {
-		super(problem, "Uniform Cost Search");
+		super(problem, "Busca de Custo Uniforme (BCU)");
 	}
 	
 	@Override

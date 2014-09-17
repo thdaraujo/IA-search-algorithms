@@ -1,17 +1,10 @@
 import java.util.List;
 
-/**
- * 
- */
 
-/**
- * @author thiagoaraujo
- *
- */
-public class AStarSearch extends Search {
+public class DepthFirstLimitedSearch extends Search {
 
-	public AStarSearch(IPuzzleProblem problem){
-		super(problem, "Busca A* (A*)");
+	public DepthFirstLimitedSearch(IPuzzleProblem problem){
+		super(problem, "Busca em Profundidade Limitada (BPL)");
 	}
 	
 	@Override

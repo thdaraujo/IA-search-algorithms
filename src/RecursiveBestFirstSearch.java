@@ -8,11 +8,12 @@ import java.util.List;
  * @author thiagoaraujo
  *
  */
-public class BestFirstSearch extends Search {
+public class RecursiveBestFirstSearch extends Search {
 
-	public BestFirstSearch(IPuzzleProblem problem){
-		super(problem, "Best-First Search");
+	public RecursiveBestFirstSearch(IPuzzleProblem problem){
+		super(problem, "Recursive Best-First Search (RBFS)");
 	}
+	
 	@Override
 	public List<IState> search() {
 		// TODO Auto-generated method stub

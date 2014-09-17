@@ -11,7 +11,7 @@ import java.util.List;
 public class DepthFirstIterativeSearch extends Search {
 
 	public DepthFirstIterativeSearch(IPuzzleProblem problem){
-		super(problem, "Iterative Depth-First Search");
+		super(problem, "Busca em Profundidade Iterativa (BPI)");
 	}
 	
 	@Override
