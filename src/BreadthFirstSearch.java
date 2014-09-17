@@ -47,7 +47,7 @@ public class BreadthFirstSearch extends Search {
         q.add(s);
         
         while (!q.isEmpty()) {
-            Node v = q.remove();
+            Node v = q.poll();
             //for (Node w : G.getAdjacentNodes(v)) {
             
             IState state = v.getState();

@@ -11,6 +11,8 @@ import java.util.List;
  */
 public class ReguaPuzzleProblem implements IPuzzleProblem {
 	
+	private String validStateRegex;
+	
 	public static enum Action{
 		moveLeft(-1),  	//1 position to the left
 		jumpLeft(-2),  	//2 positions to the left
@@ -57,7 +59,7 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 		
 		this.initial = initialState;
 		this.N = n;
-		
+		this.validStateRegex = "^B{#}A{#}$".replaceAll("#", Integer.toString(N)); 
 		IState initial = new StateReguaPuzzle(Action.none, initialState);
 		this.first = makeChild(null, Action.none, initial);
 	}
@@ -116,8 +118,8 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 	@Override
 	public boolean goalTest(IState state) {
 		//TODO mudar!!
-		System.out.println("Evaluating " + state.getStateDefinition());
-		return state.getStateDefinition().equals("AA-BB");
+		return state.getStateDefinition().replace("-", "").matches(this.validStateRegex);
+		
 	}
 
 	@Override
