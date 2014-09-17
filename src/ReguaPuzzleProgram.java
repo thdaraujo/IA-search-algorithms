@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 import org.omg.CORBA.Environment;
 
@@ -42,7 +43,11 @@ public class ReguaPuzzleProgram {
 		}
 		
 		ISearch search = new BreadthFirstSearch(problem);
-		search.search(null);
+		List<IState> path = search.search();
+		
+		for(IState state : path){
+			System.out.println(">> " + state.getStateDefinition());
+		}
 		
 	}
 	

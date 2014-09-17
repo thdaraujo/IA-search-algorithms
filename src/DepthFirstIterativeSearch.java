@@ -15,7 +15,7 @@ public class DepthFirstIterativeSearch extends Search {
 	}
 	
 	@Override
-	public List<IState> search(IState meta) {
+	public List<IState> search() {
 		// TODO Auto-generated method stub
 		return null;
 	}
