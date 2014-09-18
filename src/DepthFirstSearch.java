@@ -26,32 +26,25 @@ public class DepthFirstSearch extends Search {
 	public List<IState> search() {
 		IPuzzleProblem problem = this.getProblem();
 		return dfs_iterative(problem.getFirst(), problem);
-		//return dfs(problem.getFirst(), problem);
+		
+		//recursive
+		/*
+		Node meta = dfs_recursive(problem.getFirst(), problem);
+		
+		if(meta != null){
+			System.out.println("Meta found!");
+			return pathToRoot(meta);
+		}
+		else{
+			return new LinkedList<IState>();
+		}
+		*/
 	}
 
 	@Override
 	public boolean isMeta(IState state, IPuzzleProblem problem) {
 		return problem.goalTest(state);
 	}
-	
-	/*1  procedure DFS(G,v):
-		2      label v as discovered
-		3      for all edges from v to w in G.adjacentEdges(v) do
-		4          if vertex w is not labeled as discovered then
-		5              recursively call DFS(G,w)
-	*/
-	
-	/*
-	1  procedure DFS-iterative(G,v):
-		2      let S be a stack
-		3      S.push(v)
-		4      while S is not empty
-		5            v ← S.pop() 
-		6            if v is not labeled as discovered:
-		7                label v as discovered
-		8                for all edges from v to w in G.adjacentEdges(v) do
-		9                    S.push(w)
-	*/
 	
 	public List<IState> dfs_iterative(Node s, IPuzzleProblem problem)
 	{
@@ -80,5 +73,26 @@ public class DepthFirstSearch extends Search {
             }
 		}
 		return path;
+	}
+	
+	private Node dfs_recursive(Node s, IPuzzleProblem problem){
+		
+		visited.add(s);
+		
+		if(this.isMeta(s.getState(), problem)){
+    		return s;
+    	}
+		
+		IState state = s.getState();
+		for(Object legalAction: problem.getLegalActions(state)){
+        	Node w = problem.makeChild(s, legalAction, state);
+        	System.out.println("Explorando: " + w.getState().getStateDefinition());
+
+        	if (!visited.contains(w)) {
+        		Node meta = dfs_recursive(w, problem);
+        		if(meta != null) return meta;
+            }
+		}
+		return null;
 	}
 }
