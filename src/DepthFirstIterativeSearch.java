@@ -22,8 +22,7 @@ public class DepthFirstIterativeSearch extends Search {
 
 	@Override
 	public boolean isMeta(IState state, IPuzzleProblem problem) {
-		// TODO Auto-generated method stub
-		return false;
+		return problem.goalTest(state);
 	}
 
 }

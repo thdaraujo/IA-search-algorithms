@@ -12,7 +12,7 @@ public final class SearchFactory {
 			searchAlgorithm = new DepthFirstSearch(problem);
 			break;
 		case "BPL":
-			searchAlgorithm = new DepthFirstLimitedSearch(problem);
+			searchAlgorithm = new DepthFirstLimitedSearch(problem, 100);
 			break;
 		case "BPI":
 			searchAlgorithm = new DepthFirstIterativeSearch(problem);
