@@ -35,7 +35,6 @@ public class BreadthFirstSearch extends Search {
 		List<IState> path = new Stack<IState>();
 		
     	if(this.isMeta(s.getState(), problem)){
-    		System.out.println("initial state is meta!");
     		path = pathToRoot(s);
     		return path;
     	}
@@ -48,7 +47,6 @@ public class BreadthFirstSearch extends Search {
         
         while (!q.isEmpty()) {
             Node v = q.poll();
-            //for (Node w : G.getAdjacentNodes(v)) {
             
             IState state = v.getState();
             for(Object legalAction: problem.getLegalActions(state)){
@@ -58,10 +56,6 @@ public class BreadthFirstSearch extends Search {
                     q.add(w);
                 }
                 if(this.isMeta(w.getState(), problem)){
-                	System.out.println("meta state found!");
-                	System.out.println("Parent: " + w.getParent().getState().getStateDefinition());
-                	System.out.println(w.getState().getStateDefinition());
-                	
                 	path = pathToRoot(w);
                 	return path;
                 }

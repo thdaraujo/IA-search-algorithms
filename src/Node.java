@@ -23,6 +23,11 @@ public class Node {
 	}
 	
 	@Override
+	public boolean equals(Object obj) {
+		return this.hashCode() == obj.hashCode();
+	}
+	
+	@Override
 	public int hashCode() {
 		return this.state.hashCode();
 	}

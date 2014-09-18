@@ -26,33 +26,13 @@ public class DepthFirstSearch extends Search {
 	public List<IState> search() {
 		IPuzzleProblem problem = this.getProblem();
 		return dfs_iterative(problem.getFirst(), problem);
+		//return dfs(problem.getFirst(), problem);
 	}
 
 	@Override
 	public boolean isMeta(IState state, IPuzzleProblem problem) {
 		return problem.goalTest(state);
 	}
-	
-	/*
-	private List<IState> dfs(Node s, IPuzzleProblem problem){
-		visited.add(s);
-		if(this.isMeta(s.getState(), problem)){
-    		System.out.println("initial state is meta!");
-    		return pathToRoot(s);
-    	}
-		
-		IState state = s.getState();
-		for(Object legalAction: problem.getLegalActions(state)){
-        	Node w = problem.makeChild(s, legalAction, state);
-        	System.out.println("Explorando: " + w.getState().getStateDefinition());
-            if (!visited.contains(w)) {
-            	return dfs(w, problem);
-            }
-		}
-		System.out.println("meta not found!");
-		return new LinkedList<IState>();
-	}
-	*/
 	
 	/*1  procedure DFS(G,v):
 		2      label v as discovered
@@ -79,6 +59,8 @@ public class DepthFirstSearch extends Search {
 		stack.push(s);
 		List<IState> path = new LinkedList<IState>();
 		
+		visited.add(s);
+		
 		while(!stack.isEmpty()){
 			Node v = stack.pop();
 			
@@ -99,7 +81,4 @@ public class DepthFirstSearch extends Search {
 		}
 		return path;
 	}
-	
-	
-	
 }

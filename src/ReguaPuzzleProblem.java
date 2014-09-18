@@ -60,7 +60,7 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 		this.initial = initialState;
 		this.N = n;
 		this.validStateRegex = "^B{#}A{#}$".replaceAll("#", Integer.toString(N)); 
-		IState initial = new StateReguaPuzzle(Action.none, initialState);
+		IState initial = new ReguaPuzzleState(Action.none, initialState);
 		this.first = makeChild(null, Action.none, initial);
 	}
 
@@ -127,7 +127,7 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 		String newStateDefinition = state.getStateDefinition();
 		
 		newStateDefinition = act((Action)legalAction, newStateDefinition);
-		IState newState = new StateReguaPuzzle(legalAction, newStateDefinition);
+		IState newState = new ReguaPuzzleState(legalAction, newStateDefinition);
 		
 		int depth = n != null? n.getDepth() + 1 : 0;
 		return new Node(n, newState, depth);

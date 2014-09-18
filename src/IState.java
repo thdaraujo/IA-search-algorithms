@@ -6,4 +6,5 @@ public interface IState {
 	public float F();
 	public Object getAction();
 	public String getStateDefinition();
+	public int hashCode();
 }

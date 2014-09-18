@@ -1,16 +1,16 @@
 
-public class StateReguaPuzzle implements IState{
+public class ReguaPuzzleState implements IState{
 
 	private String stateDefinition;
 	private Object action;
 	private float g; //cost until node
 	private float h; //heuristics - cost until goal.
 	
-	public StateReguaPuzzle(Object action, String stateDefinition){
+	public ReguaPuzzleState(Object action, String stateDefinition){
 		this(action, stateDefinition, 0, 0);
 	}
 	
-	public StateReguaPuzzle(Object action, String stateDefinition, float g, float h) {
+	public ReguaPuzzleState(Object action, String stateDefinition, float g, float h) {
 		this.action = action;
 		this.stateDefinition = stateDefinition;
 		this.g = g;
@@ -41,6 +41,11 @@ public class StateReguaPuzzle implements IState{
 	@Override
 	public String getStateDefinition() {
 		return this.stateDefinition;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return this.hashCode() == obj.hashCode();
 	}
 	
 	@Override
