@@ -28,7 +28,7 @@ public class UniformCostSearch extends Search {
 	        public int compare(Node node1, Node node2) {
 	        	IState a = node1.getState(),
 	        			b = node2.getState();
-	        	int result = Float.compare(a.F(), b.F());
+	        	int result = Float.compare(a.getCostTotal(), b.getCostTotal());
 	        	return result;
 	        }
 	    });
@@ -56,7 +56,7 @@ public class UniformCostSearch extends Search {
                 	if(!frontierContains(w)){
                 		addToFrontier(w);
                 	}
-                	else if(getValueFrontier(w) < w.getState().F()){
+                	else if(getValueFrontier(w) < w.getState().getCostTotal()){
                 		
                 	}
                 }
@@ -67,7 +67,7 @@ public class UniformCostSearch extends Search {
 	
 	public void addToFrontier(Node n){
 		this.frontier.add(n);
-		this.frontierValues.put(n, n.getState().F());
+		this.frontierValues.put(n, n.getState().getCostTotal());
 	}
 	
 	public boolean frontierContains(Node n){

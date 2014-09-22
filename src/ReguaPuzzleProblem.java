@@ -124,10 +124,15 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 
 	@Override
 	public Node makeChild(Node n, Object legalAction, IState state) {
+		Action action = (Action)legalAction;
 		String newStateDefinition = state.getStateDefinition();
+		newStateDefinition = act(action, newStateDefinition);
 		
-		newStateDefinition = act((Action)legalAction, newStateDefinition);
-		IState newState = new ReguaPuzzleState(legalAction, newStateDefinition);
+		float childStepCost = Math.abs(action.getShift());
+		float parentCostTotal = state.getCostTotal();
+		float totalCost = parentCostTotal + childStepCost;
+		
+		IState newState = new ReguaPuzzleState(legalAction, newStateDefinition, childStepCost, totalCost);
 		
 		int depth = n != null? n.getDepth() + 1 : 0;
 		return new Node(n, newState, depth);

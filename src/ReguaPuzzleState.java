@@ -3,34 +3,28 @@ public class ReguaPuzzleState implements IState{
 
 	private String stateDefinition;
 	private Object action;
-	private float g; //cost until node
-	private float h; //heuristics - cost until goal.
+	private float costStep; //step cost until node
+	private float costTotal; //cost until node
 	
 	public ReguaPuzzleState(Object action, String stateDefinition){
 		this(action, stateDefinition, 0, 0);
 	}
 	
-	public ReguaPuzzleState(Object action, String stateDefinition, float g, float h) {
+	public ReguaPuzzleState(Object action, String stateDefinition, float costStep, float costTotal) {
 		this.action = action;
 		this.stateDefinition = stateDefinition;
-		this.g = g;
-		this.h = h;
-	}
-
-	@Override
-	public float G() {
-		return this.g;
-	}
-
-	@Override
-	public float H() {
-		return this.h;
+		this.costStep = costStep;
+		this.costTotal= costTotal;
 	}
 	
 	@Override
-	public float F()
-	{
-		return this.G() + this.H();
+	public float getCostStep() {
+		return this.costStep;
+	}
+
+	@Override
+	public float getCostTotal() {
+		return this.costTotal;
 	}
 	
 	@Override
@@ -50,6 +44,11 @@ public class ReguaPuzzleState implements IState{
 	
 	@Override
 	public int hashCode() {
-		return this.stateDefinition.hashCode(); //TODO verificar
+		return this.stateDefinition.hashCode();
+	}
+
+	@Override
+	public float getHeuristics() {
+		return 0; //TODO
 	}
 }
