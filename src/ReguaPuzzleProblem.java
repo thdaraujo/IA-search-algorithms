@@ -117,9 +117,7 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 
 	@Override
 	public boolean goalTest(IState state) {
-		//TODO mudar!!
 		return state.getStateDefinition().replace("-", "").matches(this.validStateRegex);
-		
 	}
 
 	@Override
@@ -134,7 +132,8 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 		
 		IState newState = new ReguaPuzzleState(legalAction, newStateDefinition, childStepCost, totalCost);
 		
-		int depth = n != null? n.getDepth() + 1 : 0;
+		int depth = n != null? n.getDepth() + 1 : 1;
+		
 		return new Node(n, newState, depth);
 	}
 	
@@ -166,4 +165,25 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 		
 		return newStateDefinition;
 	}	
+	
+	/*
+	 * Returns the number of wrong positioned elements.
+	 */
+	public final int getHeuristicsWrongPosition(IState state){
+		String stateDefinition = state.getStateDefinition().replace("-", ""); //ignore white
+		
+		int wrongPositionedCount = 0;
+		for(int i = 0; i < this.N; i++){
+			if(stateDefinition.charAt(i) == 'A') wrongPositionedCount++;
+		}
+		wrongPositionedCount = 2 * wrongPositionedCount;
+		
+		System.out.println(state.getStateDefinition() +  " elementos em posicao errada = " + wrongPositionedCount);
+		return wrongPositionedCount;
+	}
+	
+	private int getHeuristicsDistance(IState state){
+		return 0;
+	}
+	
 }

@@ -35,8 +35,6 @@ public class UniformCostSearch extends Search {
 			
 			Node v = frontier.poll();
 			
-			System.out.println("Explorando: " + v.getState().getStateDefinition() + " - Custo: " + v.getCostTotal());
-			
 			IState state = v.getState();
 			if(this.isMeta(state, problem)){
 				return pathToRoot(v);
@@ -58,30 +56,6 @@ public class UniformCostSearch extends Search {
 		return new LinkedList<>();
 	}
 	
-	/*
-	 
-	 procedure UniformCostSearch(Graph, root, goal)
-	  node := root, cost = 0
-	  frontier := priority queue containing node only
-	  explored := empty set
-	  do
-	    if frontier is empty
-	      return failure
-	    node := frontier.pop()
-	    if node is goal
-	      return solution
-	    explored.add(node)
-	    for each of node's neighbors n
-	      if n is not in explored
-	        if n is not in frontier
-	          frontier.add(n)
-	        else if n is in frontier with higher cost
-	          replace existing node with n
-	  
-	  
-	  
-	 
-	 */
 	private static Comparator<Node> createPathCostComparator() {
 		return new Comparator<Node>() {
 			public int compare(Node node1, Node node2) {
