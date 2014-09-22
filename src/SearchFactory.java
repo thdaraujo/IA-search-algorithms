@@ -1,7 +1,7 @@
 
 public final class SearchFactory {
 	
-	public static ISearch getSearch(String param, IPuzzleProblem problem) throws Exception{
+	public static ISearch getSearch(String param, IPuzzleProblem problem, int limit) throws Exception{
 		ISearch searchAlgorithm;
 		
 		switch (param.toUpperCase()) {
@@ -12,7 +12,7 @@ public final class SearchFactory {
 			searchAlgorithm = new DepthFirstSearch(problem);
 			break;
 		case "BPL":
-			searchAlgorithm = new DepthFirstLimitedSearch(problem, 100);
+			searchAlgorithm = new DepthFirstLimitedSearch(problem, limit);
 			break;
 		case "BPI":
 			searchAlgorithm = new DepthFirstIterativeSearch(problem);

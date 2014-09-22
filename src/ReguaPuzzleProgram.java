@@ -47,7 +47,8 @@ public class ReguaPuzzleProgram {
 			System.out.println(action.toString());
 		}
 		
-		ISearch search = SearchFactory.getSearch(searchParam, problem);
+		int limit = 100;
+		ISearch search = SearchFactory.getSearch(searchParam, problem, limit);
 		List<IState> path = search.search();
 		
 		for(IState state : path){
