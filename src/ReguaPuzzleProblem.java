@@ -130,7 +130,10 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 		float parentCostTotal = state.getCostTotal();
 		float totalCost = parentCostTotal + childStepCost;
 		
-		IState newState = new ReguaPuzzleState(legalAction, newStateDefinition, childStepCost, totalCost);
+		float heuristics = getHeuristicsWrongPosition(newStateDefinition); //TODO somente para A-star e IDA-star
+		//deve-se somar o total com a heuristica?
+		
+		IState newState = new ReguaPuzzleState(legalAction, newStateDefinition, childStepCost, totalCost, heuristics);
 		
 		int depth = n != null? n.getDepth() + 1 : 1;
 		
@@ -169,8 +172,8 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 	/*
 	 * Returns the number of wrong positioned elements.
 	 */
-	public final int getHeuristicsWrongPosition(IState state){
-		String stateDefinition = state.getStateDefinition().replace("-", ""); //ignore white
+	public final float getHeuristicsWrongPosition(String stateDefinition){
+		stateDefinition = stateDefinition.replace("-", ""); //ignore white
 		
 		int wrongPositionedCount = 0;
 		for(int i = 0; i < this.N; i++){
@@ -178,11 +181,11 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 		}
 		wrongPositionedCount = 2 * wrongPositionedCount;
 		
-		System.out.println(state.getStateDefinition() +  " elementos em posicao errada = " + wrongPositionedCount);
+		System.out.println(stateDefinition +  " elementos em posicao errada = " + wrongPositionedCount);
 		return wrongPositionedCount;
 	}
 	
-	private int getHeuristicsDistance(IState state){
+	public float getHeuristicsDistance(String stateDefinition){
 		return 0;
 	}
 	

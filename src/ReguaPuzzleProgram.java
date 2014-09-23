@@ -52,7 +52,7 @@ public class ReguaPuzzleProgram {
 		List<IState> path = search.search();
 		
 		for(IState state : path){
-			System.out.println(">> " + state.getStateDefinition());
+			System.out.println(">> " + state.getStateDefinition() + " Custo: " + state.getCostTotal() + " Heuristica: " + state.getHeuristics());
 		}
 		
 	}

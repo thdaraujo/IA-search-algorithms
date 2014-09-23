@@ -36,6 +36,10 @@ public class Node {
 		return this.state.getCostTotal();
 	}
 	
+	public float getHeuristics(){
+		return this.state.getHeuristics();
+	}
+	
 	public long getTimeStamp(){
 		return this.timestamp;
 	}

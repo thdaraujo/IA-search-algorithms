@@ -27,4 +27,6 @@ public interface IPuzzleProblem {
 	public Node makeChild(Node n, Object action, IState state);
 	public boolean goalTest(IState state);
 	
+	public float getHeuristicsWrongPosition(String stateDefinition);
+	public float getHeuristicsDistance(String stateDefinition);
 }

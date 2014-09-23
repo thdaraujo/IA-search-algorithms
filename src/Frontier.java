@@ -16,13 +16,17 @@ public class Frontier {
 		frontierValuesMap = new HashMap<Node, Float>();
 	}
 	
-	public void add(Node n){
+	public void add(Node n, float value){
 		this.frontierPQ.add(n);
-		this.frontierValuesMap.put(n, n.getCostTotal());
+		this.frontierValuesMap.put(n, value);
 	}
 	
 	public boolean contains(Node n){
 		return this.frontierValuesMap.containsKey(n);
+	}
+	
+	public Node peek(){
+		return this.frontierPQ.peek();
 	}
 	
 	public Node poll(){
@@ -35,8 +39,8 @@ public class Frontier {
 		return this.frontierValuesMap.get(n);
 	}
 	
-	public void replace(Node n){
-		this.frontierValuesMap.put(n, n.getCostTotal());
+	public void replace(Node n, float value){
+		this.frontierValuesMap.put(n, value);
 	}
 	
 	public boolean isEmpty(){

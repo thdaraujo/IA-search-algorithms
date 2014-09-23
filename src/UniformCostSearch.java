@@ -22,14 +22,14 @@ public class UniformCostSearch extends Search {
 		super(problem, "Busca de Custo Uniforme (BCU)");
 		
 		visited = new HashSet<Node>();
-		frontier = new Frontier(UniformCostSearch.createPathCostComparator());
+		frontier = new Frontier(createPathCostComparator());
 	}
 	
 	@Override
 	public List<IState> search() {
 		IPuzzleProblem problem = this.getProblem();
 		Node root = problem.getFirst();
-		frontier.add(root);
+		frontier.add(root, root.getCostTotal());
 		
 		while(!frontier.isEmpty()){
 			
@@ -45,10 +45,10 @@ public class UniformCostSearch extends Search {
             	Node w = problem.makeChild(v, legalAction, state);
                 if (!visited.contains(w)) {
                 	if(!frontier.contains(w)){
-                		frontier.add(w);
+                		frontier.add(w, w.getCostTotal());
                 	}
                 	else if(frontier.getValue(w) > w.getCostTotal()){
-                		frontier.replace(w);
+                		frontier.replace(w, w.getCostTotal());
                 	}
                 }
             }
@@ -61,7 +61,7 @@ public class UniformCostSearch extends Search {
 			public int compare(Node node1, Node node2) {
 				float thisWeight = node1.getCostTotal();  
 			    float thatWeight = node2.getCostTotal();  
-			    if(thisWeight != thatWeight){  
+			    if(Math.abs(thisWeight - thatWeight) < 0.001){   
 			        return Double.compare(thisWeight, thatWeight);
 			    }  
 			    else{  
