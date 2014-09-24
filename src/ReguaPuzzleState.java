@@ -55,6 +55,6 @@ public class ReguaPuzzleState implements IState{
 
 	@Override
 	public float getHeuristics() {
-		return 0; //TODO
+		return this.heuristics;
 	}
 }

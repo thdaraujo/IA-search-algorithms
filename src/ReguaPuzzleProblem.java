@@ -180,8 +180,6 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 			if(stateDefinition.charAt(i) == 'A') wrongPositionedCount++;
 		}
 		wrongPositionedCount = 2 * wrongPositionedCount;
-		
-		System.out.println(stateDefinition +  " elementos em posicao errada = " + wrongPositionedCount);
 		return wrongPositionedCount;
 	}
 	

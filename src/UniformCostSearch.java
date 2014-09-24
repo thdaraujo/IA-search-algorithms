@@ -35,6 +35,10 @@ public class UniformCostSearch extends Search {
 			
 			Node v = frontier.poll();
 			
+			System.out.println("explorando " + v.getState().getStateDefinition() 
+					+ " custo: " + v.getCostTotal() 
+					+ " h:" + v.getHeuristics());
+			
 			IState state = v.getState();
 			if(this.isMeta(state, problem)){
 				return pathToRoot(v);
@@ -61,7 +65,7 @@ public class UniformCostSearch extends Search {
 			public int compare(Node node1, Node node2) {
 				float thisWeight = node1.getCostTotal();  
 			    float thatWeight = node2.getCostTotal();  
-			    if(Math.abs(thisWeight - thatWeight) < 0.001){   
+			    if(Math.abs(thisWeight - thatWeight) > 0.001){   
 			        return Double.compare(thisWeight, thatWeight);
 			    }  
 			    else{  
