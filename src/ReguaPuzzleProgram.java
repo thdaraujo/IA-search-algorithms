@@ -44,7 +44,7 @@ public class ReguaPuzzleProgram {
 		List<Object> legalActions = problem.getLegalActions(problem.getFirst().getState());
 		
 		for(Object action : legalActions){
-			System.out.println(action.toString());
+			System.out.println(((Action)action).getShift());
 		}
 		
 		int limit = 100;

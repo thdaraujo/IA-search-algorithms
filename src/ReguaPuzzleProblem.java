@@ -12,19 +12,6 @@ import java.util.List;
 public class ReguaPuzzleProblem implements IPuzzleProblem {
 	
 	private String validStateRegex;
-	
-	public static enum Action{
-		moveLeft(-1),  	//1 position to the left
-		jumpLeft(-2),  	//2 positions to the left
-		moveRight(1), 	//1 position to the right
-		jumpRight(2), 	//2 positions to the right
-		none(0);	   	//do nothing
-		
-		private final int shift;
-        private Action(final int shift) { this.shift = shift; }
-        public int getShift() { return shift; }
-	}
-	
 	private static char EMPTY_SPACE = '-';
 	private int N;
 	private String initial;
@@ -60,8 +47,8 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 		this.initial = initialState;
 		this.N = n;
 		this.validStateRegex = "^B{#}A{#}$".replaceAll("#", Integer.toString(N)); 
-		IState initial = new ReguaPuzzleState(Action.none, initialState);
-		this.first = makeChild(null, Action.none, initial);
+		IState initial = new ReguaPuzzleState(new Action(), initialState);
+		this.first = makeChild(null, new Action(), initial);
 	}
 
 	@Override
@@ -106,10 +93,21 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 	@Override
 	public List<Object> getLegalActions(IState state) {
 		List<Object> actionList = new ArrayList<Object>();
+		String stateDefinition = state.getStateDefinition();
 		
-		for(Action action : Action.values()){
-			boolean isLegal = isLegal(action, state.getStateDefinition());
-			if(isLegal) actionList.add(action);
+		int length = stateDefinition.length();
+		int emptyPosition = getEmptyPosition(stateDefinition);
+		
+		//left shift
+		for(int pos = emptyPosition - 1, i = 0; pos >= 0 && i < this.N; i++, pos--){
+			Action leftAction = new Action(pos - emptyPosition);
+			actionList.add(leftAction);
+		}
+		
+		//right shift
+		for(int pos = emptyPosition + 1, i = 0; pos < length && i < this.N; i++, pos++){
+			Action rightAction = new Action(pos - emptyPosition);
+			actionList.add(rightAction);
 		}
 		
 		return actionList;
@@ -148,7 +146,7 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 	 * returns true when the empty space can be moved (legal action)
 	 */
 	private boolean isLegal(Action action, String stateDefinition){
-		if(action == Action.none) return false; //ignore none
+		if(action.getShift() == 0) return false; //ignore none
 		
 		int length = stateDefinition.length();
 		int emptyPosition = getEmptyPosition(stateDefinition);
