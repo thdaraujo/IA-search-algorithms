@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -70,8 +71,7 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 		return this.N;
 	}
 
-	@Override
-	public List<Object> getLegalActions(IState state) {
+	private List<Object> getLegalActions(IState state) {
 		List<Object> actionList = new ArrayList<Object>();
 		String stateDefinition = state.getStateDefinition();
 		
@@ -98,8 +98,7 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 		return state.getStateDefinition().replace("-", "").matches(this.validStateRegex);
 	}
 
-	@Override
-	public Node makeChild(Node n, Object legalAction, IState state) {
+	private Node makeChild(Node parent, Object legalAction, IState state) {
 		Action action = (Action)legalAction;
 		String newStateDefinition = state.getStateDefinition();
 		newStateDefinition = act(action, newStateDefinition);
@@ -112,9 +111,9 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 		
 		IState newState = new ReguaPuzzleState(legalAction, newStateDefinition, childStepCost, totalCost, heuristics);
 		
-		int depth = n != null? n.getDepth() + 1 : 1;
+		int depth = parent != null? parent.getDepth() + 1 : 1;
 		
-		return new Node(n, newState, depth);
+		return new Node(parent, newState, depth);
 	}
 	
 	private int getEmptyPosition(String stateDefinition){
@@ -149,5 +148,18 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 	
 	public float getHeuristics2(String stateDefinition){
 		return 0;
+	}
+
+	@Override
+	public List<Node> getDescendants(Node n) {
+		List<Node> descendants = new LinkedList<Node>();
+		IState state = n.getState();
+		List<Object> legalActions = this.getLegalActions(state);
+		
+		for(Object legalAction: legalActions){
+        	Node sucessor = this.makeChild(n, legalAction, state);
+        	descendants.add(sucessor);
+		}
+		return descendants;
 	}
 }

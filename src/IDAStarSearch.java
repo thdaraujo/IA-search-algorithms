@@ -47,8 +47,7 @@ public class IDAStarSearch extends Search {
 		}
 		
 		float min = Float.POSITIVE_INFINITY;
-		for(Object legalAction: problem.getLegalActions(n.getState())){
-        	Node sucessor = problem.makeChild(n, legalAction, n.getState());
+		for(Node sucessor : problem.getDescendants(n)){
         	
         	SearchResult result = idaStar(sucessor, g + sucessor.getCostStep(), bound);
         	if(result.isGoalFound()) return result;

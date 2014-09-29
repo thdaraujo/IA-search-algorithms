@@ -32,10 +32,7 @@ public class DepthFirstLimitedSearch extends Search {
 			return Collections.emptyList();
 		}
 		else{
-						
-			IState state = s.getState();
-			for(Object legalAction: problem.getLegalActions(state)){
-	        	Node w = problem.makeChild(s, legalAction, state);
+			for(Node w : problem.getDescendants(s)){
 	        	
 	        	w.printNode();
 	        	

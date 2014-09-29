@@ -61,9 +61,7 @@ public class DepthFirstSearch extends Search {
 				return path;
 			}
 				
-			IState state = v.getState();
-            for(Object legalAction: problem.getLegalActions(state)){
-            	Node w = problem.makeChild(v, legalAction, state);
+            for(Node w : problem.getDescendants(v)){
             	
             	w.printNode();
             	
@@ -84,9 +82,7 @@ public class DepthFirstSearch extends Search {
     		return s;
     	}
 		
-		IState state = s.getState();
-		for(Object legalAction: problem.getLegalActions(state)){
-        	Node w = problem.makeChild(s, legalAction, state);
+		for(Node w : problem.getDescendants(s)){
 
         	w.printNode();
         	

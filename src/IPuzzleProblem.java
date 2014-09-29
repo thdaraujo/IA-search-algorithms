@@ -21,8 +21,7 @@ public interface IPuzzleProblem {
 	public int N();
 	public String toString();
 	
-	public List<Object> getLegalActions(IState state);
-	public Node makeChild(Node n, Object action, IState state);
+	public List<Node> getDescendants(Node n);
 	public boolean goalTest(IState state);
 	
 	public float getHeuristics1(String stateDefinition);

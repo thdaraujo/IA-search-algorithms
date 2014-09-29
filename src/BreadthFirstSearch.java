@@ -43,12 +43,9 @@ public class BreadthFirstSearch extends Search {
         while (!q.isEmpty()) {
             Node v = q.poll();
             
-            IState state = v.getState();
-            
             v.printNode();
             
-            for(Object legalAction: problem.getLegalActions(state)){
-            	Node w = problem.makeChild(v, legalAction, state);
+            for(Node w : problem.getDescendants(v)){
                 if (!visited.contains(w)) {
                     visited.add(w);
                     q.add(w);

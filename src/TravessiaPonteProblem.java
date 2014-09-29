@@ -29,14 +29,13 @@ public class TravessiaPonteProblem implements IPuzzleProblem {
 		return this.N;
 	}
 
-	@Override
-	public List<Object> getLegalActions(IState state) {
+	
+	private List<Object> getLegalActions(IState state) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public Node makeChild(Node n, Object action, IState state) {
+	private Node makeChild(Node n, Object action, IState state) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -57,6 +56,12 @@ public class TravessiaPonteProblem implements IPuzzleProblem {
 	public float getHeuristics2(String stateDefinition) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List<Node> getDescendants(Node n) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

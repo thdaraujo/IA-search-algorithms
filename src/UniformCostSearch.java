@@ -41,8 +41,7 @@ public class UniformCostSearch extends Search {
 			}
 			visited.add(v);
 			
-			for(Object legalAction: problem.getLegalActions(state)){
-            	Node w = problem.makeChild(v, legalAction, state);
+			for(Node w : problem.getDescendants(v)){
                 if (!visited.contains(w)) {
                 	if(!frontier.contains(w)){
                 		frontier.add(w, w.getCostTotal());

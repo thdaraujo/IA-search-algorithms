@@ -35,6 +35,8 @@ public abstract class Search implements ISearch {
 	@Override
 	public abstract boolean isMeta(IState state, IPuzzleProblem problem);
 	
+	
+	
 	 /**
      * Returns the path from <tt>meta</tt> to <tt>initial state</tt>, or
      * <tt>null</tt> if no such path.

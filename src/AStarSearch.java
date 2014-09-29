@@ -43,8 +43,7 @@ public class AStarSearch extends Search {
 			
 			closedList.add(current, f(current));
 			
-			for(Object legalAction: problem.getLegalActions(state)){
-            	Node sucessor = problem.makeChild(current, legalAction, state);
+			for(Node sucessor : problem.getDescendants(current)){
             	if(closedList.contains(sucessor)) continue;
             	openList.add(sucessor, f(sucessor));
 			}
