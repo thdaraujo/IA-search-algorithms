@@ -37,7 +37,7 @@ public class IDAStarSearch extends Search {
 	private SearchResult idaStar(Node n, float g, float bound){
 		IPuzzleProblem problem = this.getProblem();
 		
-		System.out.println("n: " + n.getState().getStateDefinition() + " g: " + g + " bound: " + bound);
+		n.printNode();
 		
 		float f = g + n.getHeuristics();
 		if(f > bound) return new SearchResult(f);

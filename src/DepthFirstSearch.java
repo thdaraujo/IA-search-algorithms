@@ -64,7 +64,9 @@ public class DepthFirstSearch extends Search {
 			IState state = v.getState();
             for(Object legalAction: problem.getLegalActions(state)){
             	Node w = problem.makeChild(v, legalAction, state);
-            	System.out.println("Explorando: " + w.getState().getStateDefinition());
+            	
+            	w.printNode();
+            	
                 if (!visited.contains(w)) {
                     visited.add(w);
                     stack.push(w);
@@ -85,8 +87,9 @@ public class DepthFirstSearch extends Search {
 		IState state = s.getState();
 		for(Object legalAction: problem.getLegalActions(state)){
         	Node w = problem.makeChild(s, legalAction, state);
-        	System.out.println("Explorando: " + w.getState().getStateDefinition());
 
+        	w.printNode();
+        	
         	if (!visited.contains(w)) {
         		Node meta = dfs_recursive(w, problem);
         		if(meta != null) return meta;

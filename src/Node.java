@@ -5,6 +5,8 @@ public class Node {
 	private int depth;
 	private long timestamp;
 	
+	private final boolean VERBOSE = false;//true;
+	
 	public Node(Node parent, IState state, int depth){
 		this.parent = parent;
 		this.state = state;
@@ -50,4 +52,22 @@ public class Node {
 		return this.state.hashCode();
 	}
 	
+	public void printNode() {
+		if(!VERBOSE) return;
+		
+		if(this.getState() != null){
+			IState state = this.getState();
+			
+			//System.out.printf("%-20s%-20s%-20s%-20s%-20s\n", "state", "shift", "depth", "stepcost", "totalcost", "h");
+			System.out.printf("%-20s%-5s%-5s%-5s%-5s%-5s\n", 
+					state.getStateDefinition(), 
+					((Action)state.getAction()).getShift(),
+					this.getDepth(), 
+					state.getCostStep(), 
+					state.getCostTotal(),
+					state.getHeuristics());
+			
+			System.out.println(state.getStateDefinition());
+		}
+	}
 }

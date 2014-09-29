@@ -34,9 +34,7 @@ public class AStarSearch extends Search {
 		while(!openList.isEmpty()){
 			Node current = openList.poll();
 			
-			System.out.println("explorando " + current.getState().getStateDefinition() 
-					+ " custo: " + current.getCostTotal() 
-					+ " h:" + current.getHeuristics());
+			current.printNode();
 			
 			IState state = current.getState();
 			if(this.isMeta(state, problem)){

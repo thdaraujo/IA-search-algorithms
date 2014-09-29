@@ -33,9 +33,7 @@ public class UniformCostSearch extends Search {
 			
 			Node v = frontier.poll();
 			
-			System.out.println("explorando " + v.getState().getStateDefinition() 
-					+ " custo: " + v.getCostTotal() 
-					+ " h:" + v.getHeuristics());
+			v.printNode();
 			
 			IState state = v.getState();
 			if(this.isMeta(state, problem)){

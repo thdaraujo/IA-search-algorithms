@@ -27,7 +27,8 @@ public class DepthFirstIterativeSearch extends Search {
 			path = depthFirstLimitedSearch.search();
 			
 			int found = path != null? path.size() : 0;
-			System.out.println(limit + " BPI encontrou caminho com " + found + " nodes.");
+			//System.out.println(limit + " BPI encontrou caminho com " + found + " nodes.");
+			
 		}
 		return path;
 	}

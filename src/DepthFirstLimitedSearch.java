@@ -36,7 +36,9 @@ public class DepthFirstLimitedSearch extends Search {
 			IState state = s.getState();
 			for(Object legalAction: problem.getLegalActions(state)){
 	        	Node w = problem.makeChild(s, legalAction, state);
-	        	System.out.println("Explorando: " + w.getState().getStateDefinition());
+	        	
+	        	w.printNode();
+	        	
 	        	List<Node> result = dfs_recursive(w, problem, limit - 1);
 	        		
 	        	if(result != null && !result.isEmpty()){
