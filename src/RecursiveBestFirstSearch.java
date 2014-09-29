@@ -11,11 +11,11 @@ import java.util.List;
 public class RecursiveBestFirstSearch extends Search {
 
 	public RecursiveBestFirstSearch(IPuzzleProblem problem){
-		super(problem, "Recursive Best-First Search (RBFS)");
+		super(problem, "Recursive Best-First Search (RBFS)", new ReguaPuzzleSolution("RBFS"));
 	}
 	
 	@Override
-	public List<IState> search() {
+	public List<Node> search() {
 		// TODO Auto-generated method stub
 		return null;
 	}

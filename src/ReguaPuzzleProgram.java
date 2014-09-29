@@ -1,15 +1,9 @@
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
-
-import org.omg.CORBA.Environment;
 
 
 /**
@@ -49,12 +43,8 @@ public class ReguaPuzzleProgram {
 		
 		int limit = 100;
 		ISearch search = SearchFactory.getSearch(searchParam, problem, limit);
-		List<IState> path = search.search();
-		
-		for(IState state : path){
-			System.out.println(">> " + state.getStateDefinition() + " Custo: " + state.getCostTotal() + " Heuristica: " + state.getHeuristics());
-		}
-		
+		ISolution solution = search.getSolution();
+		solution.printSolution();
 	}
 	
 	private static void printHello() {

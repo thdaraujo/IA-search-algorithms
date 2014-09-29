@@ -12,11 +12,11 @@ import java.util.List;
 public class IDAStarSearch extends Search {
 
 	public IDAStarSearch(IPuzzleProblem problem) {
-		super(problem, "IDA*");
+		super(problem, "IDA*", new ReguaPuzzleSolution("IDA*"));
 	}
 	
 	@Override
-	public List<IState> search() {
+	public List<Node> search() {
 		
 		IPuzzleProblem problem = this.getProblem();
 		Node root = problem.getFirst();
@@ -28,7 +28,7 @@ public class IDAStarSearch extends Search {
 				return pathToRoot(result.getGoalNode());
 			}
 			if(result.getF() == Float.POSITIVE_INFINITY){
-				return new LinkedList<IState>(); //not found
+				return new LinkedList<Node>(); //not found
 			}
 			bound = result.getF();
 		}

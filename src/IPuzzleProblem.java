@@ -18,8 +18,6 @@ public interface IPuzzleProblem {
 	public Node getFirst();
 	
 	public PuzzleType getPuzzleType();
-	public List<IState> getSolution();
-	public String printSolution();
 	public int N();
 	public String toString();
 	
@@ -27,6 +25,6 @@ public interface IPuzzleProblem {
 	public Node makeChild(Node n, Object action, IState state);
 	public boolean goalTest(IState state);
 	
-	public float getHeuristicsWrongPosition(String stateDefinition);
-	public float getHeuristicsDistance(String stateDefinition);
+	public float getHeuristics1(String stateDefinition);
+	public float getHeuristics2(String stateDefinition);
 }

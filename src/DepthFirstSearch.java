@@ -1,7 +1,6 @@
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -18,12 +17,12 @@ public class DepthFirstSearch extends Search {
 	private HashSet<Node> visited;
 	
 	public DepthFirstSearch(IPuzzleProblem problem) {
-		super(problem, "Busca em Profundidade (BP)");
+		super(problem, "Busca em Profundidade (BP)", new ReguaPuzzleSolution("BP"));
 		visited = new HashSet<Node>();
 	}
 	
 	@Override
-	public List<IState> search() {
+	public List<Node> search() {
 		IPuzzleProblem problem = this.getProblem();
 		return dfs_iterative(problem.getFirst(), problem);
 		
@@ -46,11 +45,11 @@ public class DepthFirstSearch extends Search {
 		return problem.goalTest(state);
 	}
 	
-	public List<IState> dfs_iterative(Node s, IPuzzleProblem problem)
+	public List<Node> dfs_iterative(Node s, IPuzzleProblem problem)
 	{
 		Stack<Node> stack = new Stack<Node>();
 		stack.push(s);
-		List<IState> path = new LinkedList<IState>();
+		List<Node> path = new LinkedList<Node>();
 		
 		visited.add(s);
 		

@@ -1,9 +1,7 @@
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.PriorityQueue;
 
 /**
  * 
@@ -19,14 +17,14 @@ public class UniformCostSearch extends Search {
 	private HashSet<Node> visited;
 	
 	public UniformCostSearch(IPuzzleProblem problem) {
-		super(problem, "Busca de Custo Uniforme (BCU)");
+		super(problem, "Busca de Custo Uniforme (BCU)", new ReguaPuzzleSolution("BCU"));
 		
 		visited = new HashSet<Node>();
 		frontier = new Frontier(createPathCostComparator());
 	}
 	
 	@Override
-	public List<IState> search() {
+	public List<Node> search() {
 		IPuzzleProblem problem = this.getProblem();
 		Node root = problem.getFirst();
 		frontier.add(root, root.getCostTotal());

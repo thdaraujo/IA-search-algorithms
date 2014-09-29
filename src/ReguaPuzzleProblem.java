@@ -14,7 +14,6 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 	private String validStateRegex;
 	private static char EMPTY_SPACE = '-';
 	private int N;
-	private String initial;
 	private Node first;
 	
 	public ReguaPuzzleProblem(List<String> problemDefinition) throws Exception{
@@ -44,7 +43,6 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 		}
 		//end validation
 		
-		this.initial = initialState;
 		this.N = n;
 		this.validStateRegex = "^B{#}A{#}$".replaceAll("#", Integer.toString(N)); 
 		IState initial = new ReguaPuzzleState(new Action(), initialState);
@@ -62,24 +60,6 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 	@Override
 	public PuzzleType getPuzzleType() {
 		return PuzzleType.ReguaPuzzle;
-	}
-
-	/* (non-Javadoc)
-	 * @see IPuzzleMaker#getSolution()
-	 */
-	@Override
-	public List<IState> getSolution() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see IPuzzleMaker#printSolution()
-	 */
-	@Override
-	public String printSolution() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	/* (non-Javadoc)
@@ -128,7 +108,7 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 		float parentCostTotal = state.getCostTotal();
 		float totalCost = parentCostTotal + childStepCost;
 		
-		float heuristics = getHeuristicsWrongPosition(newStateDefinition); //TODO somente para A-star e IDA-star
+		float heuristics = getHeuristics1(newStateDefinition); //TODO somente para A-star e IDA-star
 		
 		IState newState = new ReguaPuzzleState(legalAction, newStateDefinition, childStepCost, totalCost, heuristics);
 		
@@ -141,19 +121,6 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 		return stateDefinition.indexOf(EMPTY_SPACE);
 	}
 	
-	/*
-	 * returns true when the empty space can be moved (legal action)
-	 */
-	private boolean isLegal(Action action, String stateDefinition){
-		if(action.getShift() == 0) return false; //ignore none
-		
-		int length = stateDefinition.length();
-		int emptyPosition = getEmptyPosition(stateDefinition);
-		
-		int finalPosition = emptyPosition + action.getShift();
-		return finalPosition >= 0 && finalPosition < length;
-	}
-
 	private String act(Action legalAction, String stateDefinition) {
 		String newStateDefinition = "";
 		int emptyPosition = getEmptyPosition(stateDefinition);
@@ -169,7 +136,7 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 	/*
 	 * Returns the number of wrong positioned elements.
 	 */
-	public final float getHeuristicsWrongPosition(String stateDefinition){
+	public final float getHeuristics1(String stateDefinition){
 		stateDefinition = stateDefinition.replace("-", ""); //ignore white
 		
 		int wrongPositionedCount = 0;
@@ -180,8 +147,7 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 		return wrongPositionedCount;
 	}
 	
-	public float getHeuristicsDistance(String stateDefinition){
+	public float getHeuristics2(String stateDefinition){
 		return 0;
 	}
-	
 }

@@ -12,14 +12,14 @@ import java.util.List;
 public class DepthFirstIterativeSearch extends Search {
 
 	public DepthFirstIterativeSearch(IPuzzleProblem problem){
-		super(problem, "Busca em Profundidade Iterativa (BPI)");
+		super(problem, "Busca em Profundidade Iterativa (BPI)", new ReguaPuzzleSolution("BPI"));
 	}
 	
 	@Override
-	public List<IState> search() {
+	public List<Node> search() {
 		IPuzzleProblem problem = this.getProblem();
 		int limit = 1, maximum = 100;
-		List<IState> path = new LinkedList<IState>();
+		List<Node> path = new LinkedList<Node>();
 		
 		ISearch depthFirstLimitedSearch;
 		while(limit < maximum && (path == null || path.isEmpty())){

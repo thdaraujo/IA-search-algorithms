@@ -5,7 +5,6 @@ public class Utils {
 		char aux = arr[from];
 		arr[from] = arr[to];
 		arr[to] = aux;
-		
 		return String.valueOf(arr);
 	}
 }

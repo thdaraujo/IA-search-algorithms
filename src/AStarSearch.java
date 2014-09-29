@@ -1,5 +1,4 @@
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,22 +12,20 @@ import java.util.List;
  */
 public class AStarSearch extends Search {
 	private Frontier openList, closedList;
-	private HashSet<Node> visited;
 
 	public AStarSearch(IPuzzleProblem problem){
-		super(problem, "Busca A* (A*)");
+		super(problem, "Busca A* (A*)", new ReguaPuzzleSolution("A*"));
 		
 		clear();
 	}
 
 	private void clear() {
-		visited = new HashSet<Node>();
 		openList = new Frontier(createPathCostComparator());
 		closedList = new Frontier(createPathCostComparator());
 	}
 	
 	@Override
-	public List<IState> search() {
+	public List<Node> search() {
 		
 		IPuzzleProblem problem = this.getProblem();
 		Node root = problem.getFirst();

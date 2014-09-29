@@ -1,5 +1,4 @@
 import java.util.List;
-import java.util.Stack;
 
 /**
  * 
@@ -10,9 +9,10 @@ import java.util.Stack;
  *
  */
 public interface ISearch {
-	List<IState> search();
+	List<Node> search();
 	IPuzzleProblem getProblem();
+	ISolution getSolution();
 	String getSearchAlgorithm();
 	boolean isMeta(IState state, IPuzzleProblem problem);
-	public List<IState> pathToRoot(Node meta);
+	public List<Node> pathToRoot(Node meta);
 }

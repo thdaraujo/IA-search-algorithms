@@ -1,13 +1,8 @@
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
-import java.util.concurrent.ArrayBlockingQueue;
-
-import com.sun.xml.internal.ws.addressing.ProblemAction;
 
 /**
  * 
@@ -20,7 +15,7 @@ import com.sun.xml.internal.ws.addressing.ProblemAction;
 public class BreadthFirstSearch extends Search {
 
 	public BreadthFirstSearch(IPuzzleProblem problem){
-		super(problem, "Busca em Largura (BL)");
+		super(problem, "Busca em Largura (BL)", new ReguaPuzzleSolution("BL"));
 	}
 	
 	@Override
@@ -29,10 +24,10 @@ public class BreadthFirstSearch extends Search {
 	}
 
 	@Override
-	public List<IState> search() {
+	public List<Node> search() {
 		IPuzzleProblem problem = this.getProblem();
 		Node s = problem.getFirst();
-		List<IState> path = new Stack<IState>();
+		List<Node> path = new Stack<Node>();
 		
     	if(this.isMeta(s.getState(), problem)){
     		path = pathToRoot(s);

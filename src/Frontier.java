@@ -7,11 +7,8 @@ public class Frontier {
 	
 	private PriorityQueue<Node> frontierPQ;
 	private HashMap<Node, Float> frontierValuesMap;
-	private Comparator<Node> comparator;
 	
 	public Frontier(Comparator<Node> comparator){
-		this.comparator = comparator;
-		
 		frontierPQ = new PriorityQueue<Node>(5, comparator); 
 		frontierValuesMap = new HashMap<Node, Float>();
 	}
