@@ -129,7 +129,6 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 		float totalCost = parentCostTotal + childStepCost;
 		
 		float heuristics = getHeuristicsWrongPosition(newStateDefinition); //TODO somente para A-star e IDA-star
-		//deve-se somar o total com a heuristica?
 		
 		IState newState = new ReguaPuzzleState(legalAction, newStateDefinition, childStepCost, totalCost, heuristics);
 		
