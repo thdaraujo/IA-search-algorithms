@@ -112,7 +112,7 @@ public class PuzzleProgram {
 	private static void runTests() throws Exception {
 		
 		//BL, BP, BPL, BPI, BCU, A*, IDA*, e RBFS.
-		String algorithm = " " + "BL" + " " + "h2";
+		String algorithm = " " + "BPI" + " " + "h1";
 		
 		run(("regua-puzzle ../testes/regua-puzzle-n2-alternado.txt" 	+ algorithm).split(" "));
 		run(("regua-puzzle ../testes/regua-puzzle-n2-falta1.txt" 		+ algorithm).split(" "));
