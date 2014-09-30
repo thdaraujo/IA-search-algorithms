@@ -56,6 +56,8 @@ public class DepthFirstSearch extends Search {
 		
 		while(!stack.isEmpty()){
 			Node v = stack.pop();
+
+			this.getSolution().addToExplored(1);
 			
 			if(this.isMeta(v.getState(), problem)){
 				path = pathToRoot(v);
@@ -65,6 +67,7 @@ public class DepthFirstSearch extends Search {
             for(Node w : problem.getDescendants(v)){
             	
             	w.printNode();
+            	this.getSolution().addToGenerated(1);
             	
                 if (permitVisitedNodes() || !visited.contains(w)) {
                     visited.add(w);
@@ -83,9 +86,12 @@ public class DepthFirstSearch extends Search {
     		return s;
     	}
 		
+		this.getSolution().addToExplored(1);
+		
 		for(Node w : problem.getDescendants(s)){
 
         	w.printNode();
+        	this.getSolution().addToGenerated(1);
         	
         	if (!visited.contains(w)) {
         		Node meta = dfs_recursive(w, problem);

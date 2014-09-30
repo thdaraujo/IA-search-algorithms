@@ -36,6 +36,7 @@ public class AStarSearch extends Search {
 			Node current = openList.poll();
 			
 			current.printNode();
+			this.getSolution().addToExplored(1);
 			
 			IState state = current.getState();
 			if(this.isMeta(state, problem)){
@@ -45,11 +46,13 @@ public class AStarSearch extends Search {
 			closedList.add(current, f(current));
 			
 			for(Node sucessor : problem.getDescendants(current)){
+				this.getSolution().addToGenerated(1);
+				
             	if(closedList.contains(sucessor)) continue;
             	openList.add(sucessor, f(sucessor));
 			}
 		}
-		return new LinkedList<>();
+		return new LinkedList<Node>();
 	}
 	
 	private float f(Node w) {

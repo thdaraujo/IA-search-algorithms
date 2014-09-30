@@ -23,13 +23,19 @@ public class DepthFirstIterativeSearch extends Search {
 		List<Node> path = new LinkedList<Node>();
 		
 		ISearch depthFirstLimitedSearch;
+		ISolution subSolution = null;
 		while(limit < maximum && (path == null || path.isEmpty())){
-			ISolution subSolution = (ISolution) this.getSolution().copy();
+			subSolution = (ISolution) this.getSolution().copy();
 			depthFirstLimitedSearch = new DepthFirstLimitedSearch(problem, subSolution, limit++);
 			path = depthFirstLimitedSearch.search();
 			
+			//this.getSolution().addSubSolution(subSolution);
+		}
+		
+		if(subSolution != null){
 			this.getSolution().addSubSolution(subSolution);
 		}
+		
 		return path;
 	}
 

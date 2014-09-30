@@ -30,16 +30,16 @@ public class ReguaPuzzleSolution implements ISolution {
 		System.out.println(this.searchAlgorithm);
 		System.out.println("caminho da solução:");
 		this.printPath();
-		System.out.printf("%-30s%-12s\n", "número de nós explorados:", this.explored);
-		System.out.printf("%-30s%-12s\n", "número de nós gerados:", this.generated);
-		System.out.printf("%-30s%-12s\n", "profundidade da meta:", this.getMetaDepth());
-		System.out.printf("%-30s%.3f\n", "custo da solução:", this.getSolutionCost());
+		System.out.printf("%-30s%-12s\n", "número de nós explorados:", 	this.explored);
+		System.out.printf("%-30s%-12s\n", "número de nós gerados:", 	this.generated);
+		System.out.printf("%-30s%-12s\n", "profundidade da meta:", 		this.getMetaDepth());
+		System.out.printf("%-30s%.3f\n", "custo da solução:", 			this.getSolutionCost());
 		System.out.printf("%-30s%.3f\n", "fator de ramificação médio:", this.getBranchingFactor());
 	}
 
 	private float getBranchingFactor() {
 		int expl = this.explored != 0? this.explored : 1;
-		return this.generated / expl;
+		return (float)this.generated / expl;
 	}
 
 	@Override
@@ -55,10 +55,12 @@ public class ReguaPuzzleSolution implements ISolution {
 		this.path = nodes;
 	}
 	
+	@Override
 	public void addToExplored(int addition){
-		this.generated += addition;
+		this.explored += addition;
 	}
 	
+	@Override
 	public void addToGenerated(int addition){
 		this.generated += addition;
 	}

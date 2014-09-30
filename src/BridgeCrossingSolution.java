@@ -39,7 +39,7 @@ public class BridgeCrossingSolution implements ISolution {
 
 	private float getBranchingFactor() {
 		int expl = this.explored != 0? this.explored : 1;
-		return this.generated / expl;
+		return (float)this.generated / expl;
 	}
 
 	@Override
@@ -56,10 +56,12 @@ public class BridgeCrossingSolution implements ISolution {
 		this.path = nodes;
 	}
 	
+	@Override
 	public void addToExplored(int addition){
-		this.generated += addition;
+		this.explored += addition;
 	}
 	
+	@Override
 	public void addToGenerated(int addition){
 		this.generated += addition;
 	}

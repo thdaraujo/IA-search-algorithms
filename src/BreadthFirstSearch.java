@@ -45,8 +45,10 @@ public class BreadthFirstSearch extends Search {
             Node v = q.poll();
             
             v.printNode();
+            this.getSolution().addToExplored(1);
             
             for(Node w : problem.getDescendants(v)){
+            	this.getSolution().addToGenerated(1);
                 if (permitVisitedNodes() || !visited.containsKey(w)) {
                     visited.put(w, w);
                     q.add(w);

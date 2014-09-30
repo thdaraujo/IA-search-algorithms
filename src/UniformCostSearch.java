@@ -35,6 +35,7 @@ public class UniformCostSearch extends Search {
 			Node v = frontier.poll();
 			
 			v.printNode();
+			this.getSolution().addToExplored(1);
 			
 			IState state = v.getState();
 			if(this.isMeta(state, problem)){
@@ -43,6 +44,8 @@ public class UniformCostSearch extends Search {
 			visited.add(v);
 			
 			for(Node w : problem.getDescendants(v)){
+				this.getSolution().addToGenerated(1);
+				
                 if (permitVisitedNodes() || !visited.contains(w)) {
                 	if(!frontier.contains(w)){
                 		frontier.add(w, w.getCostTotal());

@@ -99,21 +99,23 @@ public class PuzzleProgram {
 	}
 	
 	private static void runTests() throws Exception {
-		String algorithm = " " + "BPI";
 		
-		run(("regua-puzzle ../testes/regua-puzzle-n2-alternado.txt" 	+ algorithm).split(" "));/*
-		run(("regua-puzzle ../testes/regua-puzzle-n2-falta1.txt" 		+ algorithm).split(" "));
-		run(("regua-puzzle ../testes/regua-puzzle-n2-invertido.txt" 	+ algorithm).split(" "));
+		//BL, BP, BPL, BPI, BCU, A*, IDA*, e RBFS.
+		String algorithm = " " + "BL";
 		
-		run(("regua-puzzle ../testes/regua-puzzle-n3-alternado.txt" 	+ algorithm).split(" "));
-		run(("regua-puzzle ../testes/regua-puzzle-n3-falta1.txt" 		+ algorithm).split(" "));
-		run(("regua-puzzle ../testes/regua-puzzle-n3-invertido.txt" 	+ algorithm).split(" "));
+		run(("regua-puzzle ../testes/regua-puzzle-n2-alternado.txt" 	+ algorithm).split(" "));
+		//run(("regua-puzzle ../testes/regua-puzzle-n2-falta1.txt" 		+ algorithm).split(" "));
+		//run(("regua-puzzle ../testes/regua-puzzle-n2-invertido.txt" 	+ algorithm).split(" "));
 		
-		run(("regua-puzzle ../testes/regua-puzzle-n4-alternado.txt" 	+ algorithm).split(" "));
-		run(("regua-puzzle ../testes/regua-puzzle-n4-falta1.txt" 		+ algorithm).split(" "));
-		run(("regua-puzzle ../testes/regua-puzzle-n4-invertido.txt" 	+ algorithm).split(" "));
+		//run(("regua-puzzle ../testes/regua-puzzle-n3-alternado.txt" 	+ algorithm).split(" "));
+		//run(("regua-puzzle ../testes/regua-puzzle-n3-falta1.txt" 		+ algorithm).split(" "));
+		//run(("regua-puzzle ../testes/regua-puzzle-n3-invertido.txt" 	+ algorithm).split(" "));
 		
-		run(("travessia-da-ponte ../testes/travessia-da-ponte-n4.txt" 	+ algorithm).split(" "));*/
+		//run(("regua-puzzle ../testes/regua-puzzle-n4-alternado.txt" 	+ algorithm).split(" "));
+		//run(("regua-puzzle ../testes/regua-puzzle-n4-falta1.txt" 		+ algorithm).split(" "));
+		//run(("regua-puzzle ../testes/regua-puzzle-n4-invertido.txt" 	+ algorithm).split(" "));
+		
+		//run(("travessia-da-ponte ../testes/travessia-da-ponte-n4.txt" 	+ algorithm).split(" "));
 		
 		
 		

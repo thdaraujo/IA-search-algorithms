@@ -38,6 +38,7 @@ public class IDAStarSearch extends Search {
 	private SearchResult idaStar(Node n, float g, float bound){
 		IPuzzleProblem problem = this.getProblem();
 		
+		this.getSolution().addToExplored(1);
 		n.printNode();
 		
 		float f = g + n.getHeuristics();
@@ -50,6 +51,7 @@ public class IDAStarSearch extends Search {
 		float min = Float.POSITIVE_INFINITY;
 		for(Node sucessor : problem.getDescendants(n)){
         	
+			this.getSolution().addToGenerated(1);
         	SearchResult result = idaStar(sucessor, g + sucessor.getCostStep(), bound);
         	if(result.isGoalFound()) return result;
         	if(result.getF() < min) min = result.getF();
@@ -60,33 +62,5 @@ public class IDAStarSearch extends Search {
 	@Override
 	public boolean isMeta(IState state, IPuzzleProblem problem) {
 		return problem.goalTest(state);
-	}
-
-	private class SearchResult{
-		private float f;
-		private boolean isGoalFound;
-		private Node goalNode;
-		
-		public SearchResult(float f, boolean isGoalFound, Node goalNode){
-			this.f = f;
-			this.isGoalFound = isGoalFound;
-			this.goalNode = goalNode;
-		}
-		
-		public SearchResult(float f){
-			this(f, false, null);
-		}
-		
-		public float getF(){
-			return this.f;
-		}
-		
-		public boolean isGoalFound(){
-			return this.isGoalFound;
-		}
-		
-		public Node getGoalNode(){
-			return this.goalNode;
-		}
 	}
 }

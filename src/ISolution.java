@@ -8,4 +8,6 @@ public interface ISolution {
 	public boolean solved();
 	public ISolution copy();
 	public void addSubSolution(ISolution subSolution);
+	public void addToExplored(int addition);
+	public void addToGenerated(int addition);
 }

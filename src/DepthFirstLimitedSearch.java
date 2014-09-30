@@ -33,9 +33,11 @@ public class DepthFirstLimitedSearch extends Search {
 			return Collections.emptyList();
 		}
 		else{
+			this.getSolution().addToExplored(1);
+			s.printNode();
+			
 			for(Node w : problem.getDescendants(s)){
-	        	
-	        	w.printNode();
+	        	this.getSolution().addToGenerated(1);
 	        	
 	        	List<Node> result = dfs_recursive(w, problem, limit - 1);
 	        		
