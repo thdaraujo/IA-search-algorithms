@@ -13,11 +13,20 @@ public class BridgeCrossingProblem implements IPuzzleProblem {
 	private int N;
 	private int maxMinutes;
 	private Node first;
+	private String heuristics;
 	
 	private final String WEST_TO_EAST = ">>";
 	private final String EAST_TO_WEST = "<<";
 	
-	public BridgeCrossingProblem(List<String> problemDefinition) throws Exception{
+	public BridgeCrossingProblem(List<String> problemDefinition, String heuristics) throws Exception{
+		if(heuristics.equals("h1") || heuristics.equals("h2") || heuristics.equals("h3")){
+			this.heuristics = heuristics;
+		}
+		else{
+			System.err.println("heurística deve ser h1, h2 ou h3! Usando h1.");
+			this.heuristics = "h1";
+		}
+		
 		init(problemDefinition);
 	}
 	
@@ -79,7 +88,7 @@ public class BridgeCrossingProblem implements IPuzzleProblem {
 		float childStepCost = action.getPeople().size() > 0? Collections.max(action.getPeople()) : 0;
 		float parentCostTotal = state.getCostTotal();
 		float totalCost = parentCostTotal + childStepCost;
-		float heuristics = getHeuristics3((BridgeCrossingState)state); //TODO chavear pela 1, 2 e 3
+		float heuristics = getHeuristics((BridgeCrossingState)state);
 		int depth = parent != null? parent.getDepth() + 1 : 1;
 		
 		IState newState = new BridgeCrossingState(action, 
@@ -117,26 +126,36 @@ public class BridgeCrossingProblem implements IPuzzleProblem {
 				bcs.getPeopleAtEast().size() == this.N && 
 				bcs.getPeopleAtWest().size() == 0 ;
 				//&& bcs.getCostTotal() <= this.maxMinutes;
-		
-		//TODO ver o max minutos tambem
 	}
 
+	public float getHeuristics(BridgeCrossingState state){
+		if(this.heuristics.equals("h1")){
+			return getHeuristics_1(state);
+		}
+		else if(this.heuristics.equals("h2")){
+			return getHeuristics_2(state);
+		}
+		else{
+			return getHeuristics_3(state);
+		}
+	}
 	
-	public float getHeuristics1(BridgeCrossingState state) {
-		return 0; //TODO ?
-	}
-
 	/*
 	 * Count people still on the west
 	 */
-	public float getHeuristics2(BridgeCrossingState state) {
+	public float getHeuristics_1(BridgeCrossingState state) {
 		return state.getPeopleAtWest().size();
+	}
+
+	
+	public float getHeuristics_2(BridgeCrossingState state) {
+		return 0; //TODO ?
 	}
 	
 	/*
 	 * assuming no one needs to go back with the flashlight 
 	 */
-	public float getHeuristics3(BridgeCrossingState state) {
+	public float getHeuristics_3(BridgeCrossingState state) {
 		return Utils.sum(state.getPeopleAtWest()) / 2; //TODO optimistic
 	}
 

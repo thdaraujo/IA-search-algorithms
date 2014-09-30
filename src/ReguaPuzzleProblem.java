@@ -16,8 +16,17 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 	private static char EMPTY_SPACE = '-';
 	private int N;
 	private Node first;
+	private String heuristics;
 	
-	public ReguaPuzzleProblem(List<String> problemDefinition) throws Exception{
+	public ReguaPuzzleProblem(List<String> problemDefinition, String heuristics) throws Exception{
+		if(heuristics.equals("h1") || heuristics.equals("h2")){
+			this.heuristics = heuristics;
+		}
+		else{
+			System.err.println("heurística deve ser h1 ou h2! Usando h1.");
+			this.heuristics = "h1";
+		}
+		
 		init(problemDefinition);
 	}
 	
@@ -106,7 +115,7 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 		float childStepCost = Math.abs(action.getShift());
 		float parentCostTotal = state.getCostTotal();
 		float totalCost = parentCostTotal + childStepCost;
-		float heuristics = getHeuristics1(newStateDefinition); //TODO somente para A-star e IDA-star
+		float heuristics = getHeuristics(newStateDefinition); //TODO somente para A-star e IDA-star
 		int depth = parent != null? parent.getDepth() + 1 : 1;
 		
 		IState newState = new ReguaPuzzleState(legalAction, 
@@ -134,10 +143,20 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 		return newStateDefinition;
 	}	
 	
+	
+	public float getHeuristics(String stateDefinition){
+		if(this.heuristics.equals("h1")){
+			return getHeuristics_1(stateDefinition);
+		}
+		else{
+			return getHeuristics_2(stateDefinition);
+		}
+	}
+	
 	/*
 	 * Returns the number of wrong positioned elements.
 	 */
-	public float getHeuristics1(String stateDefinition){
+	public float getHeuristics_1(String stateDefinition){
 		stateDefinition = stateDefinition.replace("-", ""); //ignore white
 		
 		int wrongPositionedCount = 0;
@@ -148,8 +167,27 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 		return wrongPositionedCount;
 	}
 	
-	public float getHeuristics2(String stateDefinition){
-		return 0;
+	/*
+	 * Sum the distance to the other side of each wrong positioned element.
+	 */
+	public float getHeuristics_2(String stateDefinition){
+		stateDefinition = stateDefinition.replace("-", ""); //ignore white
+		
+		int wrongPositionedDistanceSum = 0;
+		int middle = this.N;
+		for(int i = 0; i < stateDefinition.length(); i++){
+			
+			if(i < middle && stateDefinition.charAt(i) == 'A'){
+				wrongPositionedDistanceSum += Math.abs(i - 1 - middle);
+			}
+			else if(i >= middle && stateDefinition.charAt(i) == 'B'){
+				wrongPositionedDistanceSum += Math.abs(i - middle);
+			}
+		}
+		
+		System.out.println(stateDefinition + " sum (h2): " + wrongPositionedDistanceSum);
+		
+		return wrongPositionedDistanceSum;
 	}
 
 	@Override
