@@ -5,7 +5,7 @@ public class Node {
 	private int depth;
 	private long timestamp;
 	
-	private final boolean VERBOSE = false;//true;
+	private final boolean VERBOSE = true;
 	
 	public Node(Node parent, IState state, int depth){
 		this.parent = parent;
@@ -61,7 +61,7 @@ public class Node {
 			//System.out.printf("%-20s%-20s%-20s%-20s%-20s\n", "state", "shift", "depth", "stepcost", "totalcost", "h");
 			System.out.printf("%-20s%-5s%-5s%-5s%-5s%-5s\n", 
 					state.getStateDefinition(), 
-					((Action)state.getAction()).getShift(),
+					((Action)state.getAction()).toString(),
 					this.getDepth(), 
 					state.getCostStep(), 
 					state.getCostTotal(),

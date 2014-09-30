@@ -16,8 +16,9 @@ public class UniformCostSearch extends Search {
 	private Frontier frontier;
 	private HashSet<Node> visited;
 	
-	public UniformCostSearch(IPuzzleProblem problem) {
-		super(problem, "Busca de Custo Uniforme (BCU)", new ReguaPuzzleSolution("BCU"));
+	public UniformCostSearch(IPuzzleProblem problem, ISolution solution) {
+		super(problem, "BCU", solution);
+		solution.setAlgorithmName(this.getSearchAlgorithm());
 		
 		visited = new HashSet<Node>();
 		frontier = new Frontier(createPathCostComparator());

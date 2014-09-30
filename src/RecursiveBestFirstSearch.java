@@ -10,8 +10,9 @@ import java.util.List;
  */
 public class RecursiveBestFirstSearch extends Search {
 
-	public RecursiveBestFirstSearch(IPuzzleProblem problem){
-		super(problem, "Recursive Best-First Search (RBFS)", new ReguaPuzzleSolution("RBFS"));
+	public RecursiveBestFirstSearch(IPuzzleProblem problem, ISolution solution){
+		super(problem, "RBFS", solution);
+		solution.setAlgorithmName(this.getSearchAlgorithm());
 	}
 	
 	@Override

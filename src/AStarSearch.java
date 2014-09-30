@@ -13,8 +13,9 @@ import java.util.List;
 public class AStarSearch extends Search {
 	private Frontier openList, closedList;
 
-	public AStarSearch(IPuzzleProblem problem){
-		super(problem, "Busca A* (A*)", new ReguaPuzzleSolution("A*"));
+	public AStarSearch(IPuzzleProblem problem, ISolution solution){
+		super(problem, "A*", solution);
+		solution.setAlgorithmName(this.getSearchAlgorithm());
 		
 		clear();
 	}

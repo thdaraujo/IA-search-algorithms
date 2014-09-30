@@ -2,7 +2,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class ReguaPuzzleSolution implements ISolution {
+public class BridgeCrossingSolution implements ISolution {
 
 	private int explored;
 	private int generated;
@@ -11,11 +11,11 @@ public class ReguaPuzzleSolution implements ISolution {
 	private String searchAlgorithm;
 	private List<Node> path;
 	
-	public ReguaPuzzleSolution(){
+	public BridgeCrossingSolution(){
 		this("");
 	}
 	
-	public ReguaPuzzleSolution(String searchAlgorithm){
+	public BridgeCrossingSolution(String searchAlgorithm){
 		this.path = new LinkedList<Node>();
 		this.searchAlgorithm = searchAlgorithm;
 	}
@@ -41,6 +41,7 @@ public class ReguaPuzzleSolution implements ISolution {
 	public void printPath() {
 		for(Node n : this.path){
 			IState state = n.getState();
+			System.out.println(state.getAction().toString());
 			System.out.println(state.getStateDefinition());
 		}
 	}
@@ -73,4 +74,5 @@ public class ReguaPuzzleSolution implements ISolution {
 	public void setAlgorithmName(String searchAlgorithmName) {
 		this.searchAlgorithm = searchAlgorithmName;
 	}
+
 }

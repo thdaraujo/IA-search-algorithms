@@ -25,9 +25,13 @@ public abstract class Search implements ISearch {
 	}
 	
 	@Override
-	public ISolution getSolution(){
+	public ISolution solve(){
 		List<Node> path = this.search();
 		this.solution.setPath(path);
+		return this.solution;
+	}
+	
+	public ISolution getSolution(){
 		return this.solution;
 	}
 	

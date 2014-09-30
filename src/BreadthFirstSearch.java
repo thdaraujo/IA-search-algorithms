@@ -14,8 +14,9 @@ import java.util.Stack;
  */
 public class BreadthFirstSearch extends Search {
 
-	public BreadthFirstSearch(IPuzzleProblem problem){
-		super(problem, "Busca em Largura (BL)", new ReguaPuzzleSolution("BL"));
+	public BreadthFirstSearch(IPuzzleProblem problem, ISolution solution){
+		super(problem, "BL", solution);
+		solution.setAlgorithmName(this.getSearchAlgorithm());
 	}
 	
 	@Override

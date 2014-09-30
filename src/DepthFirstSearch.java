@@ -16,8 +16,10 @@ public class DepthFirstSearch extends Search {
 
 	private HashSet<Node> visited;
 	
-	public DepthFirstSearch(IPuzzleProblem problem) {
-		super(problem, "Busca em Profundidade (BP)", new ReguaPuzzleSolution("BP"));
+	public DepthFirstSearch(IPuzzleProblem problem, ISolution solution) {
+		super(problem, "BP", solution);
+		solution.setAlgorithmName(this.getSearchAlgorithm());
+		
 		visited = new HashSet<Node>();
 	}
 	

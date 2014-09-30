@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 
@@ -46,9 +47,10 @@ public class PuzzleProgram {
 		int limit = 100;
 		
 		ISearch search = SearchFactory.getSearch(searchParam, problem, limit);
-		ISolution solution = search.getSolution();
+		ISolution solution = search.solve();
 		solution.printSolution();
 		System.out.println("");
+		
 	}
 	
 	private static IPuzzleProblem getPuzzleProblem(String puzzleParam, List<String> lines) throws Exception
@@ -59,7 +61,7 @@ public class PuzzleProgram {
 			puzzleProblem = new ReguaPuzzleProblem(lines);
 			break;
 		case "TRAVESSIA-DA-PONTE":
-			puzzleProblem = new TravessiaPonteProblem(lines);
+			puzzleProblem = new BridgeCrossingProblem(lines);
 		break;
 		default:
 			throw new Exception("Problem not found: [" + puzzleParam + "]");

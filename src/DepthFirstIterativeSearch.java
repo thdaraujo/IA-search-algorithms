@@ -11,8 +11,9 @@ import java.util.List;
  */
 public class DepthFirstIterativeSearch extends Search {
 
-	public DepthFirstIterativeSearch(IPuzzleProblem problem){
-		super(problem, "Busca em Profundidade Iterativa (BPI)", new ReguaPuzzleSolution("BPI"));
+	public DepthFirstIterativeSearch(IPuzzleProblem problem, ISolution solution){
+		super(problem, "BPI", solution);
+		solution.setAlgorithmName(this.getSearchAlgorithm());
 	}
 	
 	@Override
@@ -23,7 +24,7 @@ public class DepthFirstIterativeSearch extends Search {
 		
 		ISearch depthFirstLimitedSearch;
 		while(limit < maximum && (path == null || path.isEmpty())){
-			depthFirstLimitedSearch = new DepthFirstLimitedSearch(problem, limit++);
+			depthFirstLimitedSearch = new DepthFirstLimitedSearch(problem, this.getSolution(), limit++);
 			path = depthFirstLimitedSearch.search();
 			
 			int found = path != null? path.size() : 0;

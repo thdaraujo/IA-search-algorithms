@@ -6,8 +6,9 @@ public class DepthFirstLimitedSearch extends Search {
 
 	private int limit;
 	
-	public DepthFirstLimitedSearch(IPuzzleProblem problem, int limit){
-		super(problem, "Busca em Profundidade Limitada (BPL)", new ReguaPuzzleSolution("BPL"));
+	public DepthFirstLimitedSearch(IPuzzleProblem problem, ISolution solution, int limit){
+		super(problem, "BPL", solution);
+		solution.setAlgorithmName(this.getSearchAlgorithm());
 		
 		this.limit = limit;
 	}

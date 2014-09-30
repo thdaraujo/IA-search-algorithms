@@ -11,8 +11,9 @@ import java.util.List;
  */
 public class IDAStarSearch extends Search {
 
-	public IDAStarSearch(IPuzzleProblem problem) {
-		super(problem, "IDA*", new ReguaPuzzleSolution("IDA*"));
+	public IDAStarSearch(IPuzzleProblem problem, ISolution solution) {
+		super(problem, "IDA*", solution);
+		solution.setAlgorithmName(this.getSearchAlgorithm());
 	}
 	
 	@Override
