@@ -6,10 +6,15 @@ public class ReguaPuzzleSolution implements ISolution {
 
 	private int explored;
 	private int generated;
-	private int metaDepth;
-	private float solutionCost;
 	private String searchAlgorithm;
 	private List<Node> path;
+	
+	public ReguaPuzzleSolution(ReguaPuzzleSolution obj){
+		this.explored = obj.explored;
+		this.generated = obj.generated;
+		this.searchAlgorithm = obj.searchAlgorithm;
+		this.path = obj.path;
+	}
 	
 	public ReguaPuzzleSolution(){
 		this("");
@@ -27,8 +32,8 @@ public class ReguaPuzzleSolution implements ISolution {
 		this.printPath();
 		System.out.printf("%-30s%-12s\n", "número de nós explorados:", this.explored);
 		System.out.printf("%-30s%-12s\n", "número de nós gerados:", this.generated);
-		System.out.printf("%-30s%-12s\n", "profundidade da meta:", this.metaDepth);
-		System.out.printf("%-30s%.3f\n", "custo da solução:", this.solutionCost);
+		System.out.printf("%-30s%-12s\n", "profundidade da meta:", this.getMetaDepth());
+		System.out.printf("%-30s%.3f\n", "custo da solução:", this.getSolutionCost());
 		System.out.printf("%-30s%.3f\n", "fator de ramificação médio:", this.getBranchingFactor());
 	}
 
@@ -58,24 +63,45 @@ public class ReguaPuzzleSolution implements ISolution {
 		this.generated += addition;
 	}
 	
-	public void saveMetaCosts(Node meta){
-		if(meta == null){
-			System.out.println("meta is null!");
-			return;
+	public int getMetaDepth(){
+		if(this.solved()){
+			Node meta = this.path.get(this.path.size() - 1);
+			return meta.getDepth();
 		}
-		this.metaDepth = meta.getDepth();
-		this.solutionCost = meta.getCostTotal();
-		
-		System.out.println("meta found: " + meta.getState().getStateDefinition());
+		return Integer.MAX_VALUE;
+	}
+	
+	public float getSolutionCost(){
+		if(this.solved()){
+			Node meta = this.path.get(this.path.size() - 1);
+			return meta.getState().getCostTotal();
+		}
+		return Float.POSITIVE_INFINITY;
 	}
 
 	@Override
 	public void setAlgorithmName(String searchAlgorithmName) {
 		this.searchAlgorithm = searchAlgorithmName;
 	}
-
+	
+	public String getAlgorithmName() {
+		return this.searchAlgorithm;
+	}
+	
 	@Override
 	public boolean solved() {
 		return this.path != null && this.path.size() > 0;
+	}
+	
+	@Override
+	public ISolution copy() {
+		return new ReguaPuzzleSolution(this);
+	}
+
+	@Override
+	public void addSubSolution(ISolution subSolution) {
+		ReguaPuzzleSolution sub = (ReguaPuzzleSolution)subSolution;
+		this.explored += sub.explored;
+		this.generated += sub.generated;
 	}
 }

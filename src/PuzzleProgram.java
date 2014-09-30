@@ -3,7 +3,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 
@@ -29,8 +28,8 @@ public class PuzzleProgram {
 	public static void main(String[] args) throws Exception{
 		printHello();
 		
-		run(args);
-		
+		//run(args);
+		runTests();
 	}
 
 	private static void run(String[] args) throws IOException, Exception {
@@ -97,5 +96,27 @@ public class PuzzleProgram {
 		br.close();
 		
 		return lines;
+	}
+	
+	private static void runTests() throws Exception {
+		String algorithm = " " + "BPI";
+		
+		run(("regua-puzzle ../testes/regua-puzzle-n2-alternado.txt" 	+ algorithm).split(" "));/*
+		run(("regua-puzzle ../testes/regua-puzzle-n2-falta1.txt" 		+ algorithm).split(" "));
+		run(("regua-puzzle ../testes/regua-puzzle-n2-invertido.txt" 	+ algorithm).split(" "));
+		
+		run(("regua-puzzle ../testes/regua-puzzle-n3-alternado.txt" 	+ algorithm).split(" "));
+		run(("regua-puzzle ../testes/regua-puzzle-n3-falta1.txt" 		+ algorithm).split(" "));
+		run(("regua-puzzle ../testes/regua-puzzle-n3-invertido.txt" 	+ algorithm).split(" "));
+		
+		run(("regua-puzzle ../testes/regua-puzzle-n4-alternado.txt" 	+ algorithm).split(" "));
+		run(("regua-puzzle ../testes/regua-puzzle-n4-falta1.txt" 		+ algorithm).split(" "));
+		run(("regua-puzzle ../testes/regua-puzzle-n4-invertido.txt" 	+ algorithm).split(" "));
+		
+		run(("travessia-da-ponte ../testes/travessia-da-ponte-n4.txt" 	+ algorithm).split(" "));*/
+		
+		
+		
+		
 	}
 }

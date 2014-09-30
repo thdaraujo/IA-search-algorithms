@@ -24,10 +24,11 @@ public class DepthFirstIterativeSearch extends Search {
 		
 		ISearch depthFirstLimitedSearch;
 		while(limit < maximum && (path == null || path.isEmpty())){
-			depthFirstLimitedSearch = new DepthFirstLimitedSearch(problem, this.getSolution(), limit++);
+			ISolution subSolution = (ISolution) this.getSolution().copy();
+			depthFirstLimitedSearch = new DepthFirstLimitedSearch(problem, subSolution, limit++);
 			path = depthFirstLimitedSearch.search();
 			
-			int found = path != null? path.size() : 0;
+			this.getSolution().addSubSolution(subSolution);
 		}
 		return path;
 	}

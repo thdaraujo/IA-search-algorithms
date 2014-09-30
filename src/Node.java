@@ -5,7 +5,7 @@ public class Node {
 	private int depth;
 	private long timestamp;
 	
-	private final boolean VERBOSE = true;
+	private final boolean VERBOSE = false;// true;
 	
 	public Node(Node parent, IState state, int depth){
 		this.parent = parent;
