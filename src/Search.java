@@ -60,4 +60,9 @@ public abstract class Search implements ISearch {
         Collections.reverse(path);
         return path;
     }
+	
+	@Override
+	public boolean permitVisitedNodes() {
+		return this.problem.permitVisitedNodes();
+	}
 }

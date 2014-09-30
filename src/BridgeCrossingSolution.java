@@ -42,7 +42,7 @@ public class BridgeCrossingSolution implements ISolution {
 		for(Node n : this.path){
 			IState state = n.getState();
 			System.out.println(state.getAction().toString());
-			System.out.println(state.getStateDefinition());
+			System.out.println(state.getStateDefinition() + " costStep:" + n.getCostStep() + " costTotal:" + n.getCostTotal());
 		}
 	}
 
@@ -73,6 +73,11 @@ public class BridgeCrossingSolution implements ISolution {
 	@Override
 	public void setAlgorithmName(String searchAlgorithmName) {
 		this.searchAlgorithm = searchAlgorithmName;
+	}
+	
+	@Override
+	public boolean solved() {
+		return this.path != null && this.path.size() > 0;
 	}
 
 }

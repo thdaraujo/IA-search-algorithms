@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.oracle.jrockit.jfr.ValueDefinition;
+
 /**
  * 
  */
@@ -106,12 +108,14 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 		float childStepCost = Math.abs(action.getShift());
 		float parentCostTotal = state.getCostTotal();
 		float totalCost = parentCostTotal + childStepCost;
-		
 		float heuristics = getHeuristics1(newStateDefinition); //TODO somente para A-star e IDA-star
-		
-		IState newState = new ReguaPuzzleState(legalAction, newStateDefinition, childStepCost, totalCost, heuristics);
-		
 		int depth = parent != null? parent.getDepth() + 1 : 1;
+		
+		IState newState = new ReguaPuzzleState(legalAction, 
+				newStateDefinition, 
+				childStepCost, 
+				totalCost, 
+				heuristics);
 		
 		return new Node(parent, newState, depth);
 	}
@@ -135,7 +139,7 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 	/*
 	 * Returns the number of wrong positioned elements.
 	 */
-	public final float getHeuristics1(String stateDefinition){
+	public float getHeuristics1(String stateDefinition){
 		stateDefinition = stateDefinition.replace("-", ""); //ignore white
 		
 		int wrongPositionedCount = 0;
@@ -161,5 +165,10 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
         	descendants.add(sucessor);
 		}
 		return descendants;
+	}
+
+	@Override
+	public boolean permitVisitedNodes() {
+		return false;
 	}
 }

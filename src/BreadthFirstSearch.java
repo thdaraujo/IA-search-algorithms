@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -36,9 +37,9 @@ public class BreadthFirstSearch extends Search {
     	}
     	
         Queue<Node> q = new LinkedList<Node>();
-        HashSet<Node> visited= new HashSet<Node>();
+        HashMap<Node, Node> visited = new HashMap<Node, Node>();
         
-        visited.add(s);
+        visited.put(s, s);
         q.add(s);
         
         while (!q.isEmpty()) {
@@ -47,8 +48,8 @@ public class BreadthFirstSearch extends Search {
             v.printNode();
             
             for(Node w : problem.getDescendants(v)){
-                if (!visited.contains(w)) {
-                    visited.add(w);
+                if (permitVisitedNodes() || !visited.containsKey(w)) {
+                    visited.put(w, w);
                     q.add(w);
                 }
                 if(this.isMeta(w.getState(), problem)){

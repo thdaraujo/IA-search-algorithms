@@ -15,4 +15,5 @@ public interface ISearch {
 	String getSearchAlgorithm();
 	boolean isMeta(IState state, IPuzzleProblem problem);
 	public List<Node> pathToRoot(Node meta);
+	public boolean permitVisitedNodes();
 }

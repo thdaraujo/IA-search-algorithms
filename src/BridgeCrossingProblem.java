@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -72,15 +74,20 @@ public class BridgeCrossingProblem implements IPuzzleProblem {
 
 	private Node makeChild(Node parent, Object legalAction, IState state) {
 		Action action = (Action)legalAction;
-		IState newState = (IState)act(action, (BridgeCrossingState) state);
+		BridgeCrossingState actedState = act(action, (BridgeCrossingState) state);
 		
-		//float childStepCost = Math.abs(action.getShift());
-		//float parentCostTotal = state.getCostTotal();
-		//float totalCost = parentCostTotal + childStepCost;
-		
-		//float heuristics = getHeuristics1(state); //TODO somente para A-star e IDA-star
-		
+		float childStepCost = action.getPeople().size() > 0? Collections.max(action.getPeople()) : 0;
+		float parentCostTotal = state.getCostTotal();
+		float totalCost = parentCostTotal + childStepCost;
+		float heuristics = getHeuristics3((BridgeCrossingState)state); //TODO chavear pela 1, 2 e 3
 		int depth = parent != null? parent.getDepth() + 1 : 1;
+		
+		IState newState = new BridgeCrossingState(action, 
+				actedState.getPeopleAtWest(),
+				actedState.getPeopleAtEast(),
+				childStepCost, 
+				totalCost, 
+				heuristics);
 		
 		return new Node(parent, newState, depth);
 	}
@@ -108,57 +115,77 @@ public class BridgeCrossingProblem implements IPuzzleProblem {
 		BridgeCrossingState bcs = (BridgeCrossingState) state; 
 		return bcs != null &&
 				bcs.getPeopleAtEast().size() == this.N && 
-				bcs.getPeopleAtWest().size() == 0 &&
-				bcs.getCostTotal() <= this.maxMinutes;
+				bcs.getPeopleAtWest().size() == 0 ;
+				//&& bcs.getCostTotal() <= this.maxMinutes;
 		
 		//TODO ver o max minutos tambem
 	}
 
-	@Override
-	public float getHeuristics1(String stateDefinition) {
-		// TODO Auto-generated method stub
-		return 0;
+	
+	public float getHeuristics1(BridgeCrossingState state) {
+		return 0; //TODO ?
 	}
 
-	@Override
-	public float getHeuristics2(String stateDefinition) {
-		// TODO Auto-generated method stub
-		return 0;
+	/*
+	 * Count people still on the west
+	 */
+	public float getHeuristics2(BridgeCrossingState state) {
+		return state.getPeopleAtWest().size();
+	}
+	
+	/*
+	 * assuming no one needs to go back with the flashlight 
+	 */
+	public float getHeuristics3(BridgeCrossingState state) {
+		return Utils.sum(state.getPeopleAtWest()) / 2; //TODO optimistic
 	}
 
 	@Override
 	public List<Node> getDescendants(Node parent) {
-		//TODO decidir se deve ir para esquerda ou direita
-		
 		List<Node> descendants = new ArrayList<Node>();
 		BridgeCrossingState parentState = (BridgeCrossingState)parent.getState();
+		String direction = getDirection(parentState);
+		Set<Set<Integer>> setsOfPeople = getSetsOfPeople(direction, parentState);
 		
-		String direction;
-		if(parentState.getActionDirection().equals(EAST_TO_WEST) || 
-				parentState.getActionDirection().equals("")){ 
-			//invert direction on children or
-			//go west on initial
-			direction = WEST_TO_EAST;
-		}
-		else{
-			direction = EAST_TO_WEST;
-		}
-		
-		System.out.println("pai: " + parentState.getActionDirection());
-		System.out.println("filho: " + direction);
-		
-		for(Integer person : parentState.getPeopleAtWest()){
-			Set<Integer> people = new HashSet<>();
-			people.add(person);
-			
+		for(Set<Integer> people : setsOfPeople){
 			Action legalAction = new Action(0, people, direction);
 			Node child = this.makeChild(parent, legalAction, parentState);
 			descendants.add(child);
 		}
-		
-		//TODO fazer o 2 x 2 tambem...
-		
 		return descendants;
+	}
+
+	//invert direction of children
+	private String getDirection(BridgeCrossingState parentState) {
+		if(parentState.getActionDirection().equals(WEST_TO_EAST)){
+			return EAST_TO_WEST;
+		}
+		return WEST_TO_EAST;
+	}
+
+	//gets k-sized sets of people depending on direction
+	//k=2 when going east, k=1 when returning to the west 
+	private Set<Set<Integer>> getSetsOfPeople(String direction, BridgeCrossingState parentState) {
+		List<Integer> listOfPeople;
+		int k;
+		
+		if(direction.equals(WEST_TO_EAST)){ 
+			listOfPeople = new LinkedList<Integer>(parentState.getPeopleAtWest());
+			k = 2;
+		}
+		else{
+			listOfPeople = new LinkedList<Integer>(parentState.getPeopleAtEast());
+			k = 1;
+		}
+		
+		List<Set<Integer>> result = Utils.getSubsets(listOfPeople, k);
+
+		return new HashSet<Set<Integer>>(result);
+	}
+
+	@Override
+	public boolean permitVisitedNodes() {
+		return true;
 	}
 
 }

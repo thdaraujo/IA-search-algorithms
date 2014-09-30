@@ -19,7 +19,6 @@ public class DepthFirstSearch extends Search {
 	public DepthFirstSearch(IPuzzleProblem problem, ISolution solution) {
 		super(problem, "BP", solution);
 		solution.setAlgorithmName(this.getSearchAlgorithm());
-		
 		visited = new HashSet<Node>();
 	}
 	
@@ -67,7 +66,7 @@ public class DepthFirstSearch extends Search {
             	
             	w.printNode();
             	
-                if (!visited.contains(w)) {
+                if (permitVisitedNodes() || !visited.contains(w)) {
                     visited.add(w);
                     stack.push(w);
                 }

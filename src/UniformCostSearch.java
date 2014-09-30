@@ -43,7 +43,7 @@ public class UniformCostSearch extends Search {
 			visited.add(v);
 			
 			for(Node w : problem.getDescendants(v)){
-                if (!visited.contains(w)) {
+                if (permitVisitedNodes() || !visited.contains(w)) {
                 	if(!frontier.contains(w)){
                 		frontier.add(w, w.getCostTotal());
                 	}

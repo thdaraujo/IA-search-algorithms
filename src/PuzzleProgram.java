@@ -29,6 +29,11 @@ public class PuzzleProgram {
 	public static void main(String[] args) throws Exception{
 		printHello();
 		
+		run(args);
+		
+	}
+
+	private static void run(String[] args) throws IOException, Exception {
 		if(args.length != 3) {
 			 System.err.println("[ERRO] O nome do puzzle (regua-puzzle ou travessia-da-ponte), "
 			 		+ "o caminho do arquivo e a sigla do algoritmo de busca "
@@ -48,9 +53,13 @@ public class PuzzleProgram {
 		
 		ISearch search = SearchFactory.getSearch(searchParam, problem, limit);
 		ISolution solution = search.solve();
-		solution.printSolution();
+		if(solution.solved()){
+			solution.printSolution();
+		}
+		else{
+			System.out.println("no solution found!");
+		}
 		System.out.println("");
-		
 	}
 	
 	private static IPuzzleProblem getPuzzleProblem(String puzzleParam, List<String> lines) throws Exception

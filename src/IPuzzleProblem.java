@@ -16,6 +16,7 @@ public interface IPuzzleProblem {
 	}
 	
 	public Node getFirst();
+	public boolean permitVisitedNodes();
 	
 	public PuzzleType getPuzzleType();
 	public int N();
@@ -23,7 +24,4 @@ public interface IPuzzleProblem {
 	
 	public List<Node> getDescendants(Node n);
 	public boolean goalTest(IState state);
-	
-	public float getHeuristics1(String stateDefinition);
-	public float getHeuristics2(String stateDefinition);
 }

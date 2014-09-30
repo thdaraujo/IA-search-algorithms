@@ -4,12 +4,14 @@ public final class SearchFactory {
 	public static ISearch getSearch(String param, IPuzzleProblem problem, int limit) throws Exception{
 		ISearch searchAlgorithm;
 		ISolution solution;
+		boolean permitVisitedNodes = false;
 		
 		if(problem.getPuzzleType() == IPuzzleProblem.PuzzleType.ReguaPuzzle){
 			solution = new ReguaPuzzleSolution();
 		}
 		else{
 			solution = new BridgeCrossingSolution();
+			permitVisitedNodes = true;
 		}
 		
 		switch (param.toUpperCase()) {

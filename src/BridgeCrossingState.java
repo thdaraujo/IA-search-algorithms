@@ -36,7 +36,7 @@ public class BridgeCrossingState implements IState {
 		
 		this.action = action;
 		this.costStep = costStep;
-		this.costTotal= costTotal;
+		this.costTotal = costTotal;
 		this.heuristics = heuristics;
 		
 		this.peopleAtWest = peopleAtWest != null? peopleAtWest : new HashSet<Integer>();

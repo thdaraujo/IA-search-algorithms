@@ -73,4 +73,9 @@ public class ReguaPuzzleSolution implements ISolution {
 	public void setAlgorithmName(String searchAlgorithmName) {
 		this.searchAlgorithm = searchAlgorithmName;
 	}
+
+	@Override
+	public boolean solved() {
+		return this.path != null && this.path.size() > 0;
+	}
 }
