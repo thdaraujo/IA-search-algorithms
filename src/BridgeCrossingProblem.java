@@ -147,9 +147,29 @@ public class BridgeCrossingProblem implements IPuzzleProblem {
 		return state.getPeopleAtWest().size();
 	}
 
-	
+	/*
+	 * Sum the slowest of every pair still at west
+	 * When the set of people is odd, add the slowest too.
+	 */
 	public float getHeuristics_2(BridgeCrossingState state) {
-		return 0; //TODO ?
+		float cost = 0;
+		Set<Integer> peopleOnWest = state.getPeopleAtWest();
+		if(peopleOnWest != null){
+			List<Integer> listOfPeople = new LinkedList<Integer>(peopleOnWest);
+			Collections.sort(listOfPeople);
+			
+			//sum the slowest of every pair
+			int size = listOfPeople.size();
+			for(int i = 1; i < size; i++){
+				if(i % 2 != 0) cost += listOfPeople.get(i);
+			}
+			
+			if(size % 2 != 0) {
+				cost += listOfPeople.get(size - 1);
+			}
+		}
+		
+		return cost;
 	}
 	
 	/*

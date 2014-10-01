@@ -1,5 +1,6 @@
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 
 public class BridgeCrossingSolution implements ISolution {
@@ -46,8 +47,10 @@ public class BridgeCrossingSolution implements ISolution {
 	public void printPath() {
 		for(Node n : this.path){
 			IState state = n.getState();
-			System.out.println(state.getAction().toString());
-			System.out.println(state.getStateDefinition() + " costStep:" + n.getCostStep() + " costTotal:" + n.getCostTotal());
+			Action action = (Action)state.getAction();
+			Set<Integer> people = action.getPeople();
+			System.out.println(people + " " + action.getDirection());
+			//System.out.println(state.getStateDefinition() + " costStep:" + n.getCostStep() + " costTotal:" + n.getCostTotal() + " h:" + n.getHeuristics());
 		}
 	}
 

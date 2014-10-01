@@ -112,9 +112,9 @@ public class PuzzleProgram {
 	private static void runTests() throws Exception {
 		
 		//BL, BP, BPL, BPI, BCU, A*, IDA*, e RBFS.
-		String algorithm = " " + "BPI" + " " + "h1";
+		String algorithm = " " + "RBFS" + " " + "h1";
 		
-		run(("regua-puzzle ../testes/regua-puzzle-n2-alternado.txt" 	+ algorithm).split(" "));
+		/*run(("regua-puzzle ../testes/regua-puzzle-n2-alternado.txt" 	+ algorithm).split(" "));
 		run(("regua-puzzle ../testes/regua-puzzle-n2-falta1.txt" 		+ algorithm).split(" "));
 		run(("regua-puzzle ../testes/regua-puzzle-n2-invertido.txt" 	+ algorithm).split(" "));
 		
@@ -125,8 +125,8 @@ public class PuzzleProgram {
 		run(("regua-puzzle ../testes/regua-puzzle-n4-alternado.txt" 	+ algorithm).split(" "));
 		run(("regua-puzzle ../testes/regua-puzzle-n4-falta1.txt" 		+ algorithm).split(" "));
 		run(("regua-puzzle ../testes/regua-puzzle-n4-invertido.txt" 	+ algorithm).split(" "));
-		
-		//run(("travessia-da-ponte ../testes/travessia-da-ponte-n4.txt" 	+ algorithm).split(" "));
+		*/
+		run(("travessia-da-ponte ../testes/travessia-da-ponte-n4.txt" 	+ algorithm).split(" "));
 		
 	}
 }

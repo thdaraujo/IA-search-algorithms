@@ -187,7 +187,7 @@ public class ReguaPuzzleProblem implements IPuzzleProblem {
 		
 		System.out.println(stateDefinition + " sum (h2): " + wrongPositionedDistanceSum);
 		
-		return wrongPositionedDistanceSum;
+		return (float)wrongPositionedDistanceSum / 2;
 	}
 
 	@Override

@@ -48,8 +48,13 @@ public class AStarSearch extends Search {
 			for(Node sucessor : problem.getDescendants(current)){
 				this.getSolution().addToGenerated(1);
 				
-            	if(closedList.contains(sucessor)) continue;
-            	openList.add(sucessor, f(sucessor));
+            	//if(closedList.contains(sucessor)) continue;
+            	//openList.add(sucessor, f(sucessor));
+				if(permitVisitedNodes() || !closedList.contains(sucessor)){
+					openList.add(sucessor, f(sucessor));
+				}
+					
+				
 			}
 		}
 		return new LinkedList<Node>();
